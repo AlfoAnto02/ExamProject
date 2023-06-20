@@ -10,6 +10,5 @@ public class Condition implements IShapeCondition{
 
     public String getCondition(){
         return this.Label;
-
     }
 }

@@ -7,9 +7,9 @@ public class Robot implements IRobot{
 
     private double RobotSpeed;
 
-    public Robot (Position P, Condition C, double RobotSpeed){
+    public Robot (Position P, double RobotSpeed){
         this.RobotPosition=P;
-        this.RobotCondition=C;
+        this.RobotCondition=null;
         this.RobotSpeed=RobotSpeed;
     }
 
@@ -19,6 +19,10 @@ public class Robot implements IRobot{
 
     public Condition getRobotCondition(){
         return this.RobotCondition;
+    }
+
+    public void setRobotCondition(Condition c){
+        this.RobotCondition=c;
     }
 
     public double getRobotSpeed(){

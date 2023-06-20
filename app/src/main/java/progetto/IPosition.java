@@ -1,6 +1,6 @@
 package progetto;
 
-public interface BidimnesionalPosition {
+public interface IPosition {
      double getX();
      double getY();
      void setX(double x);

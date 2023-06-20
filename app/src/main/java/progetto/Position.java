@@ -1,6 +1,6 @@
 package progetto;
 
-public class Position implements BidimnesionalPosition {
+public class Position implements IPosition {
 
     private double x;
 

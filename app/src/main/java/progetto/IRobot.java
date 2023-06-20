@@ -7,6 +7,7 @@ public interface IRobot {
 
      double getRobotSpeed();
 
+     void setRobotCondition(Condition c);
 
 
 }
