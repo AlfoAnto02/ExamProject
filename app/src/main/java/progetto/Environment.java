@@ -22,4 +22,11 @@ public class Environment implements IEnvironment {
         return shapeList;
     }
 
+    public boolean isSignaled(Condition c){
+        for(IRobot R : robotList){
+            if(R.getRobotCondition().equals(c)) return true;
+        }
+        return false;
+    }
+
 }

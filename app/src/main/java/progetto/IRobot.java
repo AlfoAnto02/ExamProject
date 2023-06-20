@@ -1,5 +1,7 @@
 package progetto;
 
+import java.util.List;
+
 public interface IRobot {
      Position getRobotPosition();
 
@@ -9,5 +11,8 @@ public interface IRobot {
 
      void setRobotCondition(Condition c);
 
+     List<ICommand> getListOfCommands();
+
+     void Consume ();
 
 }

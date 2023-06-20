@@ -19,34 +19,34 @@ public interface IHandler{
      *
      */
 
-    void moveCommand(double x, double y, double s);
+    void moveCommand(double[] args);
 
     /**
      * Method invoked when a command "MOVE RANDOM" is parsed.
      *
      */
-    void moveRandomCommand(double x1, double x2, double y1, double y2, double s);
+    void moveRandomCommand(double[] args);
 
     /**
      * Method invoked when a command "SIGNAL" is parsed.
      *
      * @param label label to signal
      */
-    void signalCommand(String label,  Robot r);
+    void signalCommand(String label, Robot R);
 
     /**
      * Method invoked when a command "UNSIGNAL" is parsed.
      *
      * @param label label to unsignal
      */
-    void unsignalCommand(String label,  Robot r);
+    void unsignalCommand(String label, Robot R);
 
     /**
      * Method invoked when a command "FOLLOW" is parsed.
      *
      * @param label label to follow
      */
-    void followCommand(String label, double dist, double s);
+    void followCommand(String label, double[] args);
 
     /**
      * Method invoked when a command "STOP" is parsed.

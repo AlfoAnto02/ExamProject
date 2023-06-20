@@ -1,5 +1,7 @@
 package progetto;
 
+import java.util.List;
+
 public class Robot implements IRobot{
     private Position RobotPosition;
 
@@ -7,12 +9,34 @@ public class Robot implements IRobot{
 
     private double RobotSpeed;
 
+
+    private List<ICommand> ListOfCommands;
+
+
+    private int programmCounter=0;
+
+
     public Robot (Position P, double RobotSpeed){
         this.RobotPosition=P;
         this.RobotCondition=null;
         this.RobotSpeed=RobotSpeed;
     }
 
+
+
+
+    public void Consume (){
+        this.getListOfCommands().get(programmCounter).Apply(this);
+        this.programmCounter++;
+    }
+
+    public int getProgrammCounter() {
+        return programmCounter;
+    }
+
+    public List<ICommand> getListOfCommands() {
+        return ListOfCommands;
+    }
     public Position getRobotPosition(){
         return this.RobotPosition;
     }

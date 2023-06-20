@@ -22,53 +22,52 @@ public class Handler implements IHandler{
     }
 
     @Override
-    public void moveCommand(double x, double y, double s) {
-        double deltaX = x * s;
-        double deltaY = y * s;
-        for(IRobot robot : this.gameEnvironment.getRobotList()){
-            robot.getRobotPosition().setX(deltaX+robot.getRobotPosition().getX());
-            robot.getRobotPosition().setY(deltaY+robot.getRobotPosition().getY());
+    public void moveCommand(double[] args) {
+        for(IRobot R : this.gameEnvironment.getRobotList()){
+            R.getListOfCommands().add(new MoveCommand(args));
         }
     }
 
     @Override
-    public void moveRandomCommand(double x1, double x2, double y1, double y2, double s) {
-        Random random = new Random();
-        double targetX = x1+ (x2-x1) * random.nextDouble();
-        double targetY = y1 + (y2-y1) * random.nextDouble();
-        for(IRobot robot : this.gameEnvironment.getRobotList()){
-            double deltaX = Math.signum(targetX-robot.getRobotPosition().getX()) * s;
-            double deltaY = Math.signum(targetY-robot.getRobotPosition().getY()) * s;
-            robot.getRobotPosition().setX(deltaX+robot.getRobotPosition().getX());
-            robot.getRobotPosition().setY(deltaY+robot.getRobotPosition().getY());
-        }
+    public void moveRandomCommand(double[] args) {
+       for(IRobot R : this.gameEnvironment.getRobotList()){
+           R.getListOfCommands().add(new MoveRandomCommand(args));
+       }
     }
 
     @Override
     public void signalCommand(String label, Robot r) {
-        if(this.gameEnvironment.getRobotList().contains(r)){
-            r.setRobotCondition(new Condition(label));
+        for(IRobot R : this.gameEnvironment.getRobotList()){
+            if (R.equals(r)) R.getListOfCommands().add(new SignalCommand(new Condition(label)));
+        }
+    }
+
+
+    @Override
+    public void unsignalCommand(String label, Robot r) {
+        for(IRobot R : this.gameEnvironment.getRobotList()){
+            if (R.equals(r)) R.getListOfCommands().add(new UnSignalCommand());
         }
     }
 
     @Override
-    public void unsignalCommand(String label,  Robot r) {
-        if(r.getRobotCondition().equals(new Condition(label))) r.setRobotCondition(null);
-    }
-
-    @Override
-    public void followCommand(String label, double dist, double s) {
+    public void followCommand(String label, double[] args) {
 
     }
+
 
     @Override
     public void stopCommand() {
-
+        for(IRobot R : this.gameEnvironment.getRobotList()){
+            R.getListOfCommands().add(new StopCommand());
+        }
     }
 
     @Override
     public void continueCommand(int s) {
-
+        for(IRobot R : this.gameEnvironment.getRobotList()){
+            R.getListOfCommands().add(new ContinueCommand(s));
+        }
     }
 
     @Override
