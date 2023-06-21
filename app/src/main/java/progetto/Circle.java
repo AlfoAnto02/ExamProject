@@ -1,10 +1,10 @@
 package progetto;
 
-public class Circle extends AbstracShape{
+public class Circle<P extends Position, C extends Condition> extends AbstracShape{
 
     private final double radius;
-    public Circle(Position p, Condition S, double r) {
-        super(p, S);
+    public Circle(P position, C Condition, double r) {
+        super(position, Condition);
         if(r < 0) throw new IllegalArgumentException("radius must be > 0");
         this.radius = r;
     }

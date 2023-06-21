@@ -2,9 +2,9 @@ package progetto;
 
 import java.util.List;
 
-public interface IEnvironment {
-     List<IRobot> getRobotList();
+public interface IEnvironment <R extends Robot, S extends AbstracShape>{
+     List<R> getRobotList();
 
-     List<IShape> getShapeList();
+     List<S> getShapeList();
 
 }

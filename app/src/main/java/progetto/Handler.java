@@ -1,5 +1,6 @@
 package progetto;
 
+import java.util.ArrayList;
 import java.util.Random;
 
 public class Handler implements IHandler{
@@ -56,6 +57,8 @@ public class Handler implements IHandler{
     }
 
 
+
+
     @Override
     public void stopCommand() {
         for(IRobot R : this.gameEnvironment.getRobotList()){
@@ -72,7 +75,9 @@ public class Handler implements IHandler{
 
     @Override
     public void repeatCommandStart(int n) {
-
+        for(IRobot R : this.gameEnvironment.getRobotList()){
+            R.getListOfCommands().add(new repeatCommand(n));
+        }
     }
 
     @Override
@@ -82,11 +87,15 @@ public class Handler implements IHandler{
 
     @Override
     public void doForeverStart() {
-
+        for(IRobot R : this.gameEnvironment.getRobotList()){
+            R.getListOfCommands().add(new doForeverCommand());
+        }
     }
 
     @Override
     public void doneCommand() {
-
+        for(IRobot R : this.gameEnvironment.getRobotList()){
+            R.getListOfCommands().add(new doneCommand());
+        }
     }
 }

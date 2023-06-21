@@ -1,37 +1,36 @@
 package progetto;
 
-import java.util.List;
+import java.util.*;
 
 public class Robot implements IRobot{
     private Position RobotPosition;
-
     private Condition RobotCondition;
-
-    private double RobotSpeed;
-
-
     private List<ICommand> ListOfCommands;
+    private int programmCounter =0;
+    private LinkedList<Integer> loopTracker = new LinkedList<Integer>();
 
-
-    private int programmCounter=0;
-
-
-    public Robot (Position P, double RobotSpeed){
-        this.RobotPosition=P;
+    public Robot (Position robotPosition){
+        this.RobotPosition=robotPosition;
         this.RobotCondition=null;
-        this.RobotSpeed=RobotSpeed;
     }
 
 
-
+    public LinkedList<Integer> getLoopTracker() {
+        return loopTracker;
+    }
 
     public void Consume (){
         this.getListOfCommands().get(programmCounter).Apply(this);
         this.programmCounter++;
     }
 
+
     public int getProgrammCounter() {
         return programmCounter;
+    }
+
+    public void setProgramCounter(int n){
+        this.programmCounter=n;
     }
 
     public List<ICommand> getListOfCommands() {
@@ -45,13 +44,10 @@ public class Robot implements IRobot{
         return this.RobotCondition;
     }
 
-    public void setRobotCondition(Condition c){
-        this.RobotCondition=c;
+    public void setRobotCondition(Condition condition){
+        this.RobotCondition=condition;
     }
 
-    public double getRobotSpeed(){
-        return this.RobotSpeed;
-    }
 
     public void setRobotPosition(double x, double y) {
         this.RobotPosition.setY(y);

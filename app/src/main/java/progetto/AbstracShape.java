@@ -1,19 +1,19 @@
 package progetto;
 
-public abstract  class AbstracShape implements IShape {
-    private Position ShapePosition;
-    private final Condition Shapecondition;
+public abstract  class AbstracShape <P extends Position, C extends Condition> implements IShape {
+    private P ShapePosition;
+    private final C Shapecondition;
 
-    public AbstracShape (Position p, Condition S){
-        this.ShapePosition = p;
+    public AbstracShape (P position, C Condition){
+        this.ShapePosition = position;
 
-        this.Shapecondition = S;
+        this.Shapecondition = Condition;
     }
 
-    public Position  getShapePosition (){
+    public P  getShapePosition (){
         return this.ShapePosition;
     }
-    public Condition getShapecondition(){
+    public C getShapecondition(){
         return this.Shapecondition;
     }
 

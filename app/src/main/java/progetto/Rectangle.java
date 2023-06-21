@@ -1,11 +1,10 @@
 package progetto;
 
-public class Rectangle extends AbstracShape {
+public class Rectangle <P extends Position, C extends Condition> extends AbstracShape {
     private final double height;
-
     private final double width;
-    public Rectangle(Position p, Condition S, double height, double width) {
-        super(p, S);
+    public Rectangle(P position, C condition, double height, double width) {
+        super(position, condition);
         if (height < 0 || width < 0) throw new IllegalArgumentException("Height and Width of the Rectangle must be >0");
         this.height=height;
         this.width=width;

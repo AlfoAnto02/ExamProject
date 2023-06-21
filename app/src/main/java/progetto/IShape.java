@@ -1,11 +1,9 @@
 package progetto;
 
-public interface IShape {
-    Position getShapePosition();
-    Condition  getShapecondition();
-
-    void setShapePosition(Position p);
-
+public interface IShape <C extends Condition, P extends Position> {
+    P getShapePosition();
+    C  getShapecondition();
+    void setShapePosition(P position);
     boolean checkCollision(Robot R);
 
 }
