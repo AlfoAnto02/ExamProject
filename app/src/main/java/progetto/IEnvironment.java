@@ -3,8 +3,10 @@ package progetto;
 import java.util.List;
 
 public interface IEnvironment <R extends Robot, S extends AbstracShape>{
-     List<R> getRobotList();
+     List<R> robotList();
 
-     List<S> getShapeList();
+     List<S> shapeList();
+
+     List<R> getCollisionList();
 
 }

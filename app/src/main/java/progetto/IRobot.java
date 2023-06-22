@@ -14,4 +14,8 @@ public interface IRobot  {
      void Consume ();
 
      void setProgramCounter(int n);
+
+     public IRobot checkCollision(List<IShape> shapeList);
+
+
 }

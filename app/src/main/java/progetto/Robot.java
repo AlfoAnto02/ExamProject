@@ -49,6 +49,13 @@ public class Robot implements IRobot{
     }
 
 
+    public IRobot checkCollision(List<IShape> shapeList){
+        for(IShape S : shapeList){
+            if(S.checkCollision(this)) return this;
+        }
+        return null;
+    }
+
     public void setRobotPosition(double x, double y) {
         this.RobotPosition.setY(y);
         this.RobotPosition.setX(x);
