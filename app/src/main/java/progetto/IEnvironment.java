@@ -7,6 +7,5 @@ public interface IEnvironment <R extends Robot, S extends AbstracShape>{
 
      List<S> shapeList();
 
-     List<R> getCollisionList();
 
 }

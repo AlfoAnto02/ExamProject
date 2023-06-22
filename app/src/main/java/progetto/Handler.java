@@ -1,5 +1,8 @@
 package progetto;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 public class Handler implements IHandler{
     private final Environment gameEnvironment;
 
@@ -80,8 +83,16 @@ public class Handler implements IHandler{
 
     @Override
     public void untilCommandStart(String label) {
-        for(IRobot R : this.gameEnvironment.getCollisionList())
+        List<IShape> checkedShapeList = this.gameEnvironment.shapeList()
+                .stream()
+                .filter(s -> s.getShapecondition().equals(new Condition(label)))
+                .collect(Collectors.toList());
+        for(IRobot R : this.gameEnvironment.robotList()){
+            R.getListOfCommands().add(new untilCommand(checkedShapeList));
+        }
     }
+
+
 
     @Override
     public void doForeverStart() {

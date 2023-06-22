@@ -1,5 +1,6 @@
 package progetto;
 
+import java.util.LinkedList;
 import java.util.List;
 
 public interface IRobot  {
@@ -17,5 +18,8 @@ public interface IRobot  {
 
      public IRobot checkCollision(List<IShape> shapeList);
 
+     public LinkedList<Integer> getLoopTracker();
 
+
+     int getProgrammCounter();
 }

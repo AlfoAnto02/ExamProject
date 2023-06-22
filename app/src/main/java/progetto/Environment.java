@@ -1,18 +1,27 @@
 package progetto;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
-public record Environment(List<IShape> shapeList, List<IRobot> robotList) implements IEnvironment {
+public class Environment implements IEnvironment {
 
 
-    public List<IRobot> getCollisionList() {
-        List<IRobot> collisionList = this.robotList
-                .stream()
-                .filter(R -> R.checkCollision(this.shapeList) != null)
-                .collect(Collectors.toList());
-        return collisionList;
+    private final List<IShape> shapeList;
+
+
+    private final List<IRobot> robotList;
+
+    public Environment (List<IShape> shapeList, List<IRobot> robotList){
+        this.shapeList=shapeList;
+        this.robotList=robotList;
+    }
+    public List<IRobot> robotList() {
+        return robotList;
+    }
+
+    public List<IShape> shapeList() {
+        return shapeList;
     }
 
 
 }
+
