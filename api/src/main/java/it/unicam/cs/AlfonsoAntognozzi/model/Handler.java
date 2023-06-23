@@ -14,6 +14,10 @@ public class Handler implements IHandler{
 
     }
 
+    public Environment getGameEnvironment() {
+        return gameEnvironment;
+    }
+
     @Override
     public void parsingStarted() {
 
@@ -21,7 +25,11 @@ public class Handler implements IHandler{
 
     @Override
     public void parsingDone() {
-
+        for(IRobot R : this.gameEnvironment.robotList()){
+            while(R.hasNextIstruction()){
+                R.Consume();
+            }
+        }
     }
 
     @Override
@@ -39,23 +47,22 @@ public class Handler implements IHandler{
     }
 
     @Override
-    public void signalCommand(String label, Robot r) {
+    public void signalCommand(String label) {
         for(IRobot R : this.gameEnvironment.robotList()){
-            if (R.equals(r)) R.getListOfCommands().add(new SignalCommand(new Condition(label)));
+            R.getListOfCommands().add(new SignalCommand(new Condition(label)));
         }
     }
 
 
     @Override
-    public void unsignalCommand(String label, Robot r) {
+    public void unsignalCommand(String label) {
         for(IRobot R : this.gameEnvironment.robotList()){
-            if (R.equals(r)) R.getListOfCommands().add(new UnSignalCommand());
+             R.getListOfCommands().add(new UnSignalCommand());
         }
     }
 
     @Override
     public void followCommand(String label, double[] args) {
-
 
     }
 

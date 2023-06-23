@@ -8,6 +8,7 @@ public class MoveCommand implements ICommand{
     private final double speed;
 
     public MoveCommand (double[] args){
+        if(args[0] < -1 || args[0] > 1 || args[1] < -1 || args[1] > 1 ) throw new IllegalArgumentException("Can't accept value of x & y < -1 or > 1");
         this.x=args[0];
         this.y=args[1];
         this.speed=args[2];

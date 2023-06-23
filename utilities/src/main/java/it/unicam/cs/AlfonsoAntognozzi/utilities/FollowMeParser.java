@@ -13,13 +13,13 @@ import java.util.Optional;
  * Instances of this class are used to parse a program from an external source.
  */
 public final class FollowMeParser {
-    private int counter = 0;  //contatore
+    private int counter = 0;
 
-    private final FollowMeParserHandler handler; //handler dei comandi (PhysicsHandler)
+    private final FollowMeParserHandler handler;
 
-    private final FollowMeShapeChecker checker;  //checker delle shape
+    private final FollowMeShapeChecker checker;
 
-    public FollowMeParser(FollowMeParserHandler handler, FollowMeShapeChecker checker) {  //constructor con nuovo checker
+    public FollowMeParser(FollowMeParserHandler handler, FollowMeShapeChecker checker) {
         this.handler = handler;
         this.checker = checker;
     }
@@ -28,22 +28,17 @@ public final class FollowMeParser {
         this(handler, FollowMeShapeChecker.DEFAULT_CHECKER);
     }
 
-    public FollowMeParser() {  //constructor con default checker  //HO AGGIUNTO QUESTO COSTRUTTORE PER FARE DEI TEST SULLA CREAZIONE DELLE SHAPES
-        this(null, FollowMeShapeChecker.DEFAULT_CHECKER);
-    }  //COSTRUTTORE DEL PARSER SENZA HANDLER SOLO CON SHAPE CHEKER DI DEFAULT
 
-
-
-    public synchronized void parseRobotProgram(File sourceFile) throws Exception {  //parser di una serie di comandi provenienti da file
-        parseRobotProgram(sourceFile.toPath()); //??
+    public synchronized void parseRobotProgram(File sourceFile) throws Exception {
+        parseRobotProgram(sourceFile.toPath());
     }
 
-    public synchronized void parseRobotProgram(Path path) throws Exception {   //parser di una serie di comandi provenienti da path
+    public synchronized void parseRobotProgram(Path path) throws Exception {
         parseRobotProgram(Files.readAllLines(path));
     }
 
 
-    public synchronized void parseRobotProgram(String code) throws Exception {  //parser di una serie di comandi provenienti da una lunga stringa
+    public synchronized void parseRobotProgram(String code) throws Exception {
         parseRobotProgram(List.of(code.split("\n")));
     }
 
@@ -74,7 +69,7 @@ public final class FollowMeParser {
         return data;
     }
 
-    private void parseRobotProgram(List<String> lines) throws Exception {  //parser di una List di stringhe contenenti i comandi per i robot
+    private void parseRobotProgram(List<String> lines) throws Exception {
         this.counter = 0;
         handler.parsingStarted();
         for (String line: lines) {
@@ -84,7 +79,7 @@ public final class FollowMeParser {
     }
 
 
-    private void handleLine(String line) throws Exception {        //fa il parsing di un comando che gli arriva da una fonte (file, long string, path )
+    private void handleLine(String line) throws Exception {
         counter++;
         if (!line.isBlank()) {
             line.trim().toUpperCase();
@@ -104,23 +99,16 @@ public final class FollowMeParser {
     private void callHandlerMethod(FollowMeParserHandler handler, RobotCommand robotCommand, String line) throws Exception {
         String[] elements = line.split(" ");
         switch (robotCommand) {
-            case MOVE       -> callMoveMethods(handler, elements);   //funzionano entrambi move e moveRandom
-            case FOLLOW     -> callFollowMethod(handler, elements); //TODO IMPLEMENTATO, VERIFICARE FUNZIONAMENTO
-
-
-            case SIGNAL     -> callSignalMethod(handler, elements); //implementato funzionante
-            case UNSIGNAL   -> callUnSignalMethod(handler, elements); //implementato funzionante
-
-
-            case STOP       -> callStopMethod(handler, elements); //implementato funzionante
-            case CONTINUE   -> callContinueMethod(handler, elements); //implementato funzionante
-
-
-            case REPEAT     -> callRepeatMethod(handler, elements);  //funziona
-            case UNTIL      -> callUntilMethod(handler, elements); //TODO CORREGGERE WHILE
-            case FOREVER    -> callForeverMethod(handler, elements); //funziona
-
-            case DONE       -> callDoneMethod(handler, elements); //funziona
+            case MOVE       -> callMoveMethods(handler, elements);
+            case FOLLOW     -> callFollowMethod(handler, elements);
+            case SIGNAL     -> callSignalMethod(handler, elements);
+            case UNSIGNAL   -> callUnSignalMethod(handler, elements);
+            case STOP       -> callStopMethod(handler, elements);
+            case CONTINUE   -> callContinueMethod(handler, elements);
+            case REPEAT     -> callRepeatMethod(handler, elements);
+            case UNTIL      -> callUntilMethod(handler, elements);
+            case FOREVER    -> callForeverMethod(handler, elements);
+            case DONE       -> callDoneMethod(handler, elements);
         }
     }
 

@@ -17,7 +17,7 @@ public class repeatCommand implements ICommand{
         if(n==this.loopLock) RobotApplyed.getLoopTracker().add(RobotApplyed.getProgrammCounter());
         this.n--;
         if (n<1){
-            RobotApplyed.getLoopTracker().set(RobotApplyed.getLoopTracker().size(),-1);
+            RobotApplyed.getLoopTracker().set(RobotApplyed.getLoopTracker().size()-1,-1);
             this.n = this.loopLock;
         }
     }

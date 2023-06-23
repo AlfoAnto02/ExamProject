@@ -23,4 +23,8 @@ public interface IRobot  {
 
 
      int getProgrammCounter();
+
+
+
+     public boolean hasNextIstruction();
 }

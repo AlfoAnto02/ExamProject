@@ -19,6 +19,7 @@ public class Robot implements IRobot{
     public Robot (Position robotPosition){
         this.RobotPosition=robotPosition;
         this.RobotCondition=null;
+        this.ListOfCommands= new ArrayList<ICommand>();
     }
 
     public LinkedList<Integer> getLoopTracker() {
@@ -28,6 +29,11 @@ public class Robot implements IRobot{
     public void Consume (){
         this.getListOfCommands().get(programmCounter).Apply(this);
         this.programmCounter++;
+    }
+
+    public boolean hasNextIstruction(){
+        if(this.getProgrammCounter()< this.getListOfCommands().size()) return true;
+        return false;
     }
 
     public int getProgrammCounter() {
@@ -70,7 +76,7 @@ public class Robot implements IRobot{
     public void skipUntilIstruction() {
         List<ICommand> sublist = this.ListOfCommands.subList(this.programmCounter,this.ListOfCommands.size());
         for (ICommand C : sublist){
-            if(!C.equals(new doneCommand())) this.programmCounter++;
+            if(!(C instanceof doneCommand)) this.programmCounter++;
             else break;
         }
     }
