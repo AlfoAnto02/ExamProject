@@ -12,9 +12,7 @@ public class untilCommand implements ICommand{
     List<IShape> checkedShapeList = new ArrayList<IShape>();
 
     public untilCommand(List<IShape> r){
-
         this.checkedShapeList = r;
-
         this.loopLocker=0;
     }
     @Override
@@ -28,10 +26,9 @@ public class untilCommand implements ICommand{
             if(s.checkCollision(RobotApplyed) == true) checked=true;
         }
         if(!checked) {
-            RobotApplyed.getLoopTracker().set(RobotApplyed.getLoopTracker().size()-1,-1);
             RobotApplyed.skipUntilIstruction();
+            RobotApplyed.getLoopTracker().set(RobotApplyed.getLoopTracker().size()-1,-1);
             this.loopLocker=0;
         }
-
     }
 }

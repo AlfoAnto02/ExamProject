@@ -1,8 +1,11 @@
 package it.unicam.cs.AlfonsoAntognozzi.model;
 import it.unicam.cs.AlfonsoAntognozzi.model.Command.ICommand;
 import it.unicam.cs.AlfonsoAntognozzi.model.Command.doneCommand;
+import it.unicam.cs.AlfonsoAntognozzi.model.Command.repeatCommand;
+import it.unicam.cs.AlfonsoAntognozzi.model.Command.untilCommand;
 import it.unicam.cs.AlfonsoAntognozzi.util.Position;
 import java.util.*;
+import java.util.stream.Collectors;
 
 public class Robot implements IRobot{
 
@@ -73,11 +76,16 @@ public class Robot implements IRobot{
     }
 
 
+
     public void skipUntilIstruction() {
         List<ICommand> sublist = this.ListOfCommands.subList(this.programmCounter,this.ListOfCommands.size());
-        for (ICommand C : sublist){
-            if(!(C instanceof doneCommand)) this.programmCounter++;
-            else break;
+        Stack<ICommand> stack = new Stack<>();
+        for (ICommand C : sublist) {
+            if(C instanceof untilCommand || C instanceof repeatCommand) stack.push(C);
+            else if(C instanceof doneCommand) stack.pop();
+            if(stack.isEmpty()) break;
+            this.programmCounter++;
         }
+
     }
 }

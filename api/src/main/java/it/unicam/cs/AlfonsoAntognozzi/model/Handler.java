@@ -67,8 +67,6 @@ public class Handler implements IHandler{
     }
 
 
-
-
     @Override
     public void stopCommand() {
         for(IRobot R : this.gameEnvironment.robotList()){
