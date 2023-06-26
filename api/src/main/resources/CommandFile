@@ -1,0 +1,10 @@
+UNTIL Sofia
+MOVE 0.5 0.5 4
+DONE
+MOVE 0.5 0.5 -4
+MOVE -0.5 -0.5 2
+UNTIL Sofia
+Repeat 2
+MOVE 0.5 0.5 4
+DONE
+DONE

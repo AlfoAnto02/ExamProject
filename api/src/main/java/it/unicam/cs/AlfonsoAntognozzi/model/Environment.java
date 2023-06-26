@@ -1,5 +1,6 @@
 package it.unicam.cs.AlfonsoAntognozzi.model;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Environment implements IEnvironment {
@@ -10,8 +11,8 @@ public class Environment implements IEnvironment {
 
     private final List<IRobot> robotList;
 
-    public Environment (List<IShape> shapeList, List<IRobot> robotList){
-        this.shapeList=shapeList;
+    public Environment (List<IRobot> robotList){
+        this.shapeList = new ArrayList<>();
         this.robotList=robotList;
     }
     public List<IRobot> robotList() {
@@ -20,6 +21,10 @@ public class Environment implements IEnvironment {
 
     public List<IShape> shapeList() {
         return shapeList;
+    }
+
+    public void addShapeToList(IShape S) {
+        this.shapeList.add(S);
     }
 
 

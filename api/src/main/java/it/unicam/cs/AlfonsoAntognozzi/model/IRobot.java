@@ -4,7 +4,7 @@ import it.unicam.cs.AlfonsoAntognozzi.util.Position;
 import java.util.LinkedList;
 import java.util.List;
 
-public interface IRobot  {
+public interface IRobot {
      Position getRobotPosition();
 
      Condition getRobotCondition();

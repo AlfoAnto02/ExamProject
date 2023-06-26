@@ -1,10 +1,10 @@
 package it.unicam.cs.AlfonsoAntognozzi.model;
 import it.unicam.cs.AlfonsoAntognozzi.util.Position;
 
-public interface IShape <C extends Condition, P extends Position> {
+public interface IShape <C extends Condition, P extends Position, R extends Robot> {
     P getShapePosition();
     C  getShapecondition();
     void setShapePosition(P position);
-    boolean checkCollision(IRobot R);
+    boolean checkCollision(R Robot);
 
 }

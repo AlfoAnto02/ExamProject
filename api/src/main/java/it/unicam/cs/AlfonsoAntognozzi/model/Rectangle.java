@@ -9,7 +9,7 @@ public class Rectangle <P extends Position, C extends Condition> extends Abstrac
         this.height=height;
         this.width=width;
     }
-    public boolean checkCollision(IRobot R){
+    public boolean checkCollision(Robot R){
         if((R.getRobotPosition().getX()>= this.getShapePosition().getX()-this.width/2) && (R.getRobotPosition().getX()<= this.getShapePosition().getX()+this.width/2) &&
         (R.getRobotPosition().getY()>= this.getShapePosition().getY()-this.height/2)&&(R.getRobotPosition().getY()<= this.getShapePosition().getY()+this.height/2)) return true;
         else return false;

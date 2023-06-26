@@ -44,9 +44,9 @@ public class Handler implements FollowMeParserHandler {
 
     @Override
     public void moveRandomCommand(double[] args) {
-       for(IRobot R : this.gameEnvironment.robotList()){
-           R.getListOfCommands().add(new MoveRandomCommand(args));
-       }
+        for(IRobot R : this.gameEnvironment.robotList()){
+            R.getListOfCommands().add(new MoveRandomCommand(args));
+        }
     }
 
     @Override
@@ -60,7 +60,7 @@ public class Handler implements FollowMeParserHandler {
     @Override
     public void unsignalCommand(String label) {
         for(IRobot R : this.gameEnvironment.robotList()){
-             R.getListOfCommands().add(new UnSignalCommand());
+            R.getListOfCommands().add(new UnSignalCommand());
         }
     }
 

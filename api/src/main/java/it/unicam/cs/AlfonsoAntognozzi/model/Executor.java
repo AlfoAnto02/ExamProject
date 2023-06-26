@@ -1,13 +1,13 @@
 package it.unicam.cs.AlfonsoAntognozzi.model;
+import it.unicam.cs.AlfonsoAntognozzi.io.ShapeCreator;
+import it.unicam.cs.AlfonsoAntognozzi.model.Command.MoveCommand;
 import it.unicam.cs.AlfonsoAntognozzi.util.FollowMeParser;
-import it.unicam.cs.AlfonsoAntognozzi.util.FollowMeParserException;
 import it.unicam.cs.AlfonsoAntognozzi.util.Position;
 
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
-
-
+import java.util.stream.Collectors;
 
 public class Executor {
 
@@ -21,13 +21,26 @@ public class Executor {
         List<IRobot> listaDeiRobot = new ArrayList<IRobot>();
         listaDeiRobot.add(r1); listaDeiRobot.add(r2);
 
-        List<IShape> listaDiShape = new ArrayList<IShape>();
-        listaDiShape.add(c1);
+        //List<IShape> listaDiShape = new ArrayList<IShape>();
+        //listaDiShape.add(c1);  listaDiShape.add(c2); listaDiShape.add(c3);
 
-        Handler handlerProva = new Handler(new Environment(listaDiShape, listaDeiRobot));
-        FollowMeParser parser = new FollowMeParser(handlerProva, null);
-        File sourcefile = new File("C:\\ExamProject\\api\\src\\main\\resources\\fileDiProva");
-        parser.parseRobotProgram(sourcefile);
+
+
+        File shapeFile = new File("C:\\Users\\Alfonso Antognozzi\\Progetto\\api\\src\\main\\resources\\ShapeFile");
+        Environment Envprova = new Environment(listaDeiRobot);
+        ShapeCreator S = new ShapeCreator(Envprova);
+        S.parseShape(shapeFile);
+        Handler handlerProva = new Handler(Envprova);
+        FollowMeParser parser = new FollowMeParser(handlerProva,null);
+        File file = new File("C:\\Users\\Alfonso Antognozzi\\Progetto\\api\\src\\main\\resources\\CommandFile");
+        parser.parseRobotProgram(file);
+
+        double [ ] val = new double[3];
+        val[0] = -0.5;
+        val[1] = -0.5;
+        val[2] = 4.0;
+
+
 
 
         int k=0;
