@@ -5,7 +5,8 @@ import it.unicam.cs.AlfonsoAntognozzi.model.Command.repeatCommand;
 import it.unicam.cs.AlfonsoAntognozzi.model.Command.untilCommand;
 import it.unicam.cs.AlfonsoAntognozzi.util.Position;
 import java.util.*;
-import java.util.stream.Collectors;
+
+
 
 public class Robot implements IRobot{
 
@@ -38,7 +39,15 @@ public class Robot implements IRobot{
         if(this.getProgrammCounter()< this.getListOfCommands().size()) return true;
         return false;
     }
-
+    public boolean checkDistanceBetweenRobot(List<IRobot> R, double dist){
+        double distance = 0;
+        for(IRobot temp : R){
+            distance = Math.sqrt(Math.pow( (this.getRobotPosition().getX()-temp.getRobotPosition().getX() ),2)
+                    +Math.pow((this.getRobotPosition().getY() - temp.getRobotPosition().getY()),2));
+            if(distance<=dist) return true;
+        }
+        return false;
+    }
     public int getProgrammCounter() {
         return programmCounter;
     }

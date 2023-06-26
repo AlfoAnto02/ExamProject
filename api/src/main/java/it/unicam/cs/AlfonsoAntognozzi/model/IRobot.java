@@ -24,7 +24,7 @@ public interface IRobot  {
 
      int getProgrammCounter();
 
-
+     boolean checkDistanceBetweenRobot(List<IRobot> R, double dist);
 
      public boolean hasNextIstruction();
 }

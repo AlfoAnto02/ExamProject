@@ -1,15 +1,18 @@
 package it.unicam.cs.AlfonsoAntognozzi.model;
-import it.unicam.cs.AlfonsoAntognozzi.model.Command.MoveCommand;
+import it.unicam.cs.AlfonsoAntognozzi.util.FollowMeParser;
+import it.unicam.cs.AlfonsoAntognozzi.util.FollowMeParserException;
 import it.unicam.cs.AlfonsoAntognozzi.util.Position;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
+
+
 
 public class Executor {
 
 
-    public static void main (String[]args){
+    public static void main (String[]args) throws Exception {
 
         Robot r1 = new Robot(new Position(1.0 , 1.0)); Robot r2 = new Robot(new Position(6.0 , 6.0)); Robot r3 = new Robot(new Position(7.0 , 7.0)); Robot r4 = new Robot(new Position(8.0 , 8.0));
 
@@ -22,12 +25,9 @@ public class Executor {
         listaDiShape.add(c1);
 
         Handler handlerProva = new Handler(new Environment(listaDiShape, listaDeiRobot));
-
-        double [ ] val = new double[3];
-        val[0] = -0.5;
-        val[1] = -0.5;
-        val[2] = 4.0;
-
+        FollowMeParser parser = new FollowMeParser(handlerProva, null);
+        File sourcefile = new File("C:\\ExamProject\\api\\src\\main\\resources\\fileDiProva");
+        parser.parseRobotProgram(sourcefile);
 
 
         int k=0;
