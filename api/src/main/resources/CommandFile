@@ -5,6 +5,16 @@ MOVE 0.5 0.5 -4
 MOVE -0.5 -0.5 2
 UNTIL Sofia
 Repeat 2
+DONE
+UNTIL Sofia
+UNTIL Sofia
+Repeat 2
+Repeat 3
 MOVE 0.5 0.5 4
+DONE
+DONE
+DONE
+DONE
+DONE
 DONE
 DONE

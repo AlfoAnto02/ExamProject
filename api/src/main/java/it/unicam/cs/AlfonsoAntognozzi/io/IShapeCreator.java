@@ -1,7 +1,6 @@
 package it.unicam.cs.AlfonsoAntognozzi.io;
 
 import it.unicam.cs.AlfonsoAntognozzi.util.FollowMeParserException;
-
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Path;

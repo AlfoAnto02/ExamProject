@@ -18,8 +18,7 @@ public class MoveCommand implements ICommand{
     public void Apply(Robot RobotApplyed) {
         double deltaX = this.x*this.speed;
         double deltaY = this.y*this.speed;
-        RobotApplyed.getRobotPosition().setX(deltaX+RobotApplyed.getRobotPosition().getX());
-        RobotApplyed.getRobotPosition().setY(deltaY+RobotApplyed.getRobotPosition().getY());
+        RobotApplyed.setRobotPosition(deltaX+RobotApplyed.getRobotPosition().getX(),deltaY+RobotApplyed.getRobotPosition().getY());
         }
     }
 

@@ -27,8 +27,7 @@ public class MoveRandomCommand implements ICommand{
         double targetY = this.y1 + (this.y2-this.y1) * random.nextDouble();
         double deltaX = Math.signum(targetX-RobotApplyed.getRobotPosition().getX()) * this.speed;
         double deltaY = Math.signum(targetY-RobotApplyed.getRobotPosition().getY()) * this.speed;
-        RobotApplyed.getRobotPosition().setX(deltaX+RobotApplyed.getRobotPosition().getX());
-        RobotApplyed.getRobotPosition().setY(deltaY+RobotApplyed.getRobotPosition().getY());
+        RobotApplyed.setRobotPosition(deltaX+RobotApplyed.getRobotPosition().getX(),deltaY+RobotApplyed.getRobotPosition().getY());
     }
 
 }

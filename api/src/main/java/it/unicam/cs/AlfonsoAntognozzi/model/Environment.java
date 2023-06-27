@@ -27,6 +27,13 @@ public class Environment implements IEnvironment {
         this.shapeList.add(S);
     }
 
+    public boolean hasNextInstruction(){
+        for(IRobot R : this.robotList){
+            if (R.getRobotController().hasNextIstruction()) return true;
+        }
+        return false;
+    }
+
 
 }
 

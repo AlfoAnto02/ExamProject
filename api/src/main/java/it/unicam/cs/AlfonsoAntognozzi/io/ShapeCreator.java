@@ -6,8 +6,6 @@ import it.unicam.cs.AlfonsoAntognozzi.util.FollowMeParser;
 import it.unicam.cs.AlfonsoAntognozzi.util.FollowMeParserException;
 import it.unicam.cs.AlfonsoAntognozzi.util.Position;
 import it.unicam.cs.AlfonsoAntognozzi.util.ShapeData;
-
-import java.awt.*;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Path;
@@ -16,9 +14,9 @@ import java.util.List;
 
 public class ShapeCreator<S extends IShape> implements IShapeCreator {
 
-    private FollowMeParser parser;
+    private final FollowMeParser parser;
     private List<ShapeData> shapeDataList = new ArrayList<>();
-    private Environment Env;
+    private final Environment Env;
 
 
     public ShapeCreator(Environment Env){

@@ -4,7 +4,7 @@ import it.unicam.cs.AlfonsoAntognozzi.model.Robot;
 
 public class repeatCommand implements ICommand{
     private int n;
-    private int loopLock;
+    private final int loopLock;
     public repeatCommand(int n){
         this.n=n;
         this.loopLock=n;
@@ -12,7 +12,7 @@ public class repeatCommand implements ICommand{
     @Override
     public void Apply(Robot RobotApplyed) {
         if(n==this.loopLock) {
-            RobotApplyed.getLoopTracker().add(RobotApplyed.getProgrammCounter());
+            RobotApplyed.getLoopTracker().add(RobotApplyed.getRobotController().getProgramCounter());
         }
         this.n--;
         if (n<1){

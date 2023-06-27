@@ -5,6 +5,6 @@ import it.unicam.cs.AlfonsoAntognozzi.model.Robot;
 public class StopCommand implements ICommand{
     @Override
     public void Apply(Robot RobotApplyed) {
-        RobotApplyed.getListOfCommands().clear();
+        RobotApplyed.getRobotController().getCommandList().clear();
     }
 }

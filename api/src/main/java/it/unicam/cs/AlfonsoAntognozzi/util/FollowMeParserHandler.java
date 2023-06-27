@@ -22,7 +22,7 @@ public interface FollowMeParserHandler<T extends Object> {
     /**
      * This method is the method that is invoked ad the end of the parse procedure.
      */
-    void parsingDone();
+    void parsingDone() throws CloneNotSupportedException;
 
     /**
      * Method invoked when a command "MOVE" is parsed.

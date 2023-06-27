@@ -5,7 +5,7 @@ import it.unicam.cs.AlfonsoAntognozzi.model.Robot;
 
 public class SignalCommand implements ICommand{
 
-    private Condition label;
+    private final Condition label;
 
     public SignalCommand(Condition l){
         this.label=l;
