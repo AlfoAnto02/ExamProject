@@ -4,7 +4,7 @@ import it.unicam.cs.AlfonsoAntognozzi.model.Robot;
 
 public class UnSignalCommand implements ICommand{
     @Override
-    public void Apply(Robot RobotApplyed) {
-        RobotApplyed.setRobotCondition(null);
+    public void Apply(Robot RobotApplied) {
+        RobotApplied.setRobotCondition(null);
     }
 }

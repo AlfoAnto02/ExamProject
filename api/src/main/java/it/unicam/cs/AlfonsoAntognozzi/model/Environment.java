@@ -5,22 +5,13 @@ import java.util.List;
 
 public class Environment implements IEnvironment {
 
-
     private final List<IShape> shapeList;
-
 
     private final List<IRobot> robotList;
 
     public Environment (List<IRobot> robotList){
         this.shapeList = new ArrayList<>();
         this.robotList=robotList;
-    }
-    public List<IRobot> robotList() {
-        return robotList;
-    }
-
-    public List<IShape> shapeList() {
-        return shapeList;
     }
 
     public void addShapeToList(IShape S) {
@@ -32,6 +23,14 @@ public class Environment implements IEnvironment {
             if (R.getRobotController().hasNextIstruction()) return true;
         }
         return false;
+    }
+
+    public List<IRobot> robotList() {
+        return robotList;
+    }
+
+    public List<IShape> shapeList() {
+        return shapeList;
     }
 
 

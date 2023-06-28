@@ -4,7 +4,7 @@ import it.unicam.cs.AlfonsoAntognozzi.model.Robot;
 
 public interface ICommand <R extends Robot> {
 
-    void Apply (R RobotApplyed);
+    void Apply (R RobotApplied);
 
 
 

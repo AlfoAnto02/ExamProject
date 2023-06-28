@@ -20,26 +20,28 @@ public class Robot implements IRobot{
         this.robotController= new Controller();
     }
 
-    public LinkedList<Integer> getLoopTracker() {
-        return loopTracker;
-    }
-
     public boolean checkDistanceBetweenRobot(List<IRobot> R, double dist){
-        double distance;
+        double distance=dist+1;
         for(IRobot temp : R){
-            distance = Math.sqrt(Math.pow( (this.getRobotPosition().getX()-temp.getRobotPosition().getX() ),2)
-                    +Math.pow((this.getRobotPosition().getY() - temp.getRobotPosition().getY()),2));
+            if(!R.equals(this)) {
+                distance = Math.sqrt(Math.pow((this.getRobotPosition().getX() - temp.getRobotPosition().getX()), 2)
+                        + Math.pow((this.getRobotPosition().getY() - temp.getRobotPosition().getY()), 2));
+            }
             if(distance<=dist) return true;
         }
         return false;
+    }
+
+    public void Consume(){
+        this.getRobotController().Consume(this);
     }
 
     public Controller getRobotController() {
         return robotController;
     }
 
-    public void Consume(){
-        this.getRobotController().Consume(this);
+    public LinkedList<Integer> getLoopTracker() {
+        return loopTracker;
     }
 
     public Position getRobotPosition(){
@@ -47,7 +49,7 @@ public class Robot implements IRobot{
     }
 
     public Condition getRobotCondition(){
-        return this.robotCondition;
+         return this.robotCondition;
     }
 
     public void setRobotCondition(Condition condition){

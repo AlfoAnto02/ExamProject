@@ -6,19 +6,19 @@ import java.util.regex.Pattern;
 
 public class Condition implements IShapeCondition{
 
-    private final String Label;
+    private final String label;
 
-    public Condition (String Label){
-        if(Label == null || Label.trim().isEmpty()) throw new NullPointerException("Incorrect format of string");
+    public Condition (String label){
+        if(label == null || label.trim().isEmpty()) throw new NullPointerException("Incorrect format of string");
         Pattern p = Pattern.compile("[^A-Za-z0-9 _]");
-        Matcher m = p.matcher(Label);
+        Matcher m = p.matcher(label);
         boolean b = m.find();
         if(b) throw new IllegalArgumentException("Special character not accepted in my string");
-        else this.Label=Label;
+        else this.label =label;
     }
 
     public String getCondition(){
-        return this.Label;
+        return this.label;
     }
 
     @Override
@@ -26,11 +26,11 @@ public class Condition implements IShapeCondition{
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Condition condition = (Condition) o;
-        return Objects.equals(Label, condition.Label);
+        return Objects.equals(label, condition.label);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(Label);
+        return Objects.hash(label);
     }
 }

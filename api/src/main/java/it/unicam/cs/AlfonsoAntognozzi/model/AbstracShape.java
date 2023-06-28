@@ -8,9 +8,7 @@ public abstract  class AbstracShape <P extends Position, C extends Condition> im
     private final C shapeCondition;
 
     public AbstracShape (P position, C condition){
-
         this.shapePosition = position;
-
         this.shapeCondition = condition;
     }
 

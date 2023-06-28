@@ -17,7 +17,10 @@ public class Handler implements FollowMeParserHandler {
 
     @Override
     public void parsingStarted() {
-
+        for(IRobot R : this.gameEnvironment.robotList()){
+            R.getRobotController().getCommandList().clear();
+            R.getRobotController().setProgramCounter(0);
+        }
     }
 
     @Override
@@ -65,31 +68,9 @@ public class Handler implements FollowMeParserHandler {
 
     @Override
     public void followCommand(String label, double[] args) {
-        List<IRobot> tempRobList = this.gameEnvironment.robotList()
-                .stream()
-                .filter(r->r.getRobotCondition().equals(new Condition(label)))
-                .collect(Collectors.toList());
-        double avgX=0; double avgY=0; double dist = args[0];
-        for(IRobot R : tempRobList){
-            if(!R.checkDistanceBetweenRobot(tempRobList, dist)) tempRobList.remove(R);
-            else{
-                avgX += R.getRobotPosition().getX();
-                avgY += R.getRobotPosition().getY();
-            }
+        for(IRobot R : this.gameEnvironment.robotList()){
+            R.getRobotController().addCommand(new FollowLabelCommand(label, args, this.gameEnvironment.robotList()));
         }
-        if(!tempRobList.isEmpty()) {
-            for(IRobot R : this.gameEnvironment.robotList()) {
-                R.getRobotController().addCommand(new FollowLabelCommand(new Position(avgX, avgY), args));
-            }
-        }else{
-            double [] val = new double [5];
-            val[0] = -dist;val[1] = dist;val[2] = -dist;val[3] = dist;val[4] = args[0];
-            for(IRobot R : this.gameEnvironment.robotList()) {
-                R.getRobotController().addCommand(new MoveRandomCommand(val));
-            }
-        }
-
-
     }
 
 
@@ -110,7 +91,7 @@ public class Handler implements FollowMeParserHandler {
     @Override
     public void repeatCommandStart(int n) {
         for(IRobot R : this.gameEnvironment.robotList()){
-            R.getRobotController().addCommand(new repeatCommand(n));
+            R.getRobotController().addCommand(new RepeatCommand(n));
         }
     }
 
@@ -121,7 +102,7 @@ public class Handler implements FollowMeParserHandler {
                 .filter(s -> s.getShapeCondition().equals(new Condition(label)))
                 .collect(Collectors.toList());
         for(IRobot R : this.gameEnvironment.robotList()){
-            R.getRobotController().addCommand(new untilCommand(checkedShapeList));
+            R.getRobotController().addCommand(new UntilCommand(checkedShapeList));
         }
     }
 
@@ -130,14 +111,14 @@ public class Handler implements FollowMeParserHandler {
     @Override
     public void doForeverStart() {
         for(IRobot R : this.gameEnvironment.robotList()){
-            R.getRobotController().addCommand(new doForeverCommand());
+            R.getRobotController().addCommand(new DoForeverCommand());
         }
     }
 
     @Override
     public void doneCommand() {
         for(IRobot R : this.gameEnvironment.robotList()){
-            R.getRobotController().addCommand(new doneCommand());
+            R.getRobotController().addCommand(new DoneCommand());
         }
     }
     public Environment getGameEnvironment() {

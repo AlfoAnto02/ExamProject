@@ -4,28 +4,27 @@ import it.unicam.cs.AlfonsoAntognozzi.model.IShape;
 import it.unicam.cs.AlfonsoAntognozzi.model.Robot;
 import java.util.List;
 
-public class untilCommand implements ICommand{
-
+public class UntilCommand implements ICommand{
     private int loopLocker;
     private final List<IShape> checkedShapeList;
 
-    public untilCommand(List<IShape> r){
+    public UntilCommand(List<IShape> r){
         this.checkedShapeList = r;
         this.loopLocker=0;
     }
     @Override
-    public void Apply(Robot RobotApplyed) {
+    public void Apply(Robot RobotApplied) {
         boolean checked=false;
         if(this.loopLocker==0){
-            RobotApplyed.getLoopTracker().add(RobotApplyed.getRobotController().getProgramCounter());
+            RobotApplied.getLoopTracker().add(RobotApplied.getRobotController().getProgramCounter());
             this.loopLocker=-1;
         }
         for(IShape s : this.checkedShapeList){
-            if(s.checkCollision(RobotApplyed)) checked=true;
+            if(s.checkCollision(RobotApplied)) checked=true;
         }
         if(!checked) {
-            RobotApplyed.getRobotController().skipUntilInstruction();
-            RobotApplyed.getLoopTracker().set(RobotApplyed.getLoopTracker().size()-1,-1);
+            RobotApplied.getRobotController().skipUntilInstruction();
+            RobotApplied.getLoopTracker().set(RobotApplied.getLoopTracker().size()-1,-1);
             this.loopLocker=0;
         }
     }

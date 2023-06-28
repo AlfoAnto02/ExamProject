@@ -5,13 +5,11 @@ import it.unicam.cs.AlfonsoAntognozzi.model.Robot;
 import java.util.Random;
 
 public class MoveRandomCommand implements ICommand{
-
     private final double x1;
     private final double x2;
     private final double y1;
     private final double y2;
     private final double speed;
-
 
     public MoveRandomCommand(double[] args){
         this.x1=args[0];
@@ -21,13 +19,13 @@ public class MoveRandomCommand implements ICommand{
         this.speed=args[4];
     }
     @Override
-    public void Apply(Robot RobotApplyed) {
+    public void Apply(Robot RobotApplied) {
         Random random = new Random();
         double targetX = this.x1+ (this.x2-this.x1) * random.nextDouble();
         double targetY = this.y1 + (this.y2-this.y1) * random.nextDouble();
-        double deltaX = Math.signum(targetX-RobotApplyed.getRobotPosition().getX()) * this.speed;
-        double deltaY = Math.signum(targetY-RobotApplyed.getRobotPosition().getY()) * this.speed;
-        RobotApplyed.setRobotPosition(deltaX+RobotApplyed.getRobotPosition().getX(),deltaY+RobotApplyed.getRobotPosition().getY());
+        double deltaX = Math.signum(targetX- RobotApplied.getRobotPosition().getX()) * this.speed;
+        double deltaY = Math.signum(targetY- RobotApplied.getRobotPosition().getY()) * this.speed;
+        RobotApplied.setRobotPosition(deltaX+ RobotApplied.getRobotPosition().getX(),deltaY+ RobotApplied.getRobotPosition().getY());
     }
 
 }

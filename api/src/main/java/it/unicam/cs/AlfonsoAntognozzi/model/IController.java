@@ -17,6 +17,10 @@ public interface IController <R extends ICommand> {
 
     void addCommand(R C);
 
+    boolean hasNextIstruction();
+
+    public void Consume (Robot R);
+
     
 
 
