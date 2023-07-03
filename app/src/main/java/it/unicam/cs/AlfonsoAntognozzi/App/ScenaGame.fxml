@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ToolBar?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane fx:id="gameMap" prefHeight="800.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.unicam.cs.AlfonsoAntognozzi.App.SceneGameController">
+   <children>
+      <ToolBar layoutX="110.0" layoutY="50.0" prefHeight="40.0" prefWidth="349.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="1.0" AnchorPane.topAnchor="0.0">
+        <items>
+          <Button fx:id="zoomIn" mnemonicParsing="false" text="+">
+               <font>
+                  <Font name="Times New Roman Bold Italic" size="15.0" />
+               </font>
+            </Button>
+            <Button fx:id="zommOut" alignment="TOP_CENTER" contentDisplay="TOP" mnemonicParsing="false" text="-">
+               <font>
+                  <Font name="Times New Roman Bold Italic" size="15.0" />
+               </font>
+            </Button>
+            <Button fx:id="addShapes" mnemonicParsing="false" onAction="#addShapesToGame" text="AddShapes">
+               <font>
+                  <Font name="Times New Roman Bold Italic" size="15.0" />
+               </font>
+            </Button>
+            <Button fx:id="addCommand" mnemonicParsing="false" onAction="#addCommandToGame" text="AddCommand">
+               <font>
+                  <Font name="Times New Roman Bold Italic" size="15.0" />
+               </font>
+            </Button>
+            <Button fx:id="stepBack" mnemonicParsing="false" text="SB">
+               <font>
+                  <Font name="Times New Roman Bold Italic" size="15.0" />
+               </font>
+            </Button>
+            <Button fx:id="stepForw" mnemonicParsing="false" onAction="#stepForwCommand" text="SF">
+               <font>
+                  <Font name="Times New Roman Bold Italic" size="15.0" />
+               </font>
+            </Button>
+        </items>
+      </ToolBar>
+   </children>
+</AnchorPane>
