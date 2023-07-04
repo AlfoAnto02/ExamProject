@@ -60,12 +60,12 @@ public class SceneStartController {
     }
 
     private void connectToSecondScene(ActionEvent e) throws IOException {
-        URL gameURL = new File("C:\\Users\\Alfonso Antognozzi\\Progetto\\app\\src\\main\\java\\it\\unicam\\cs\\AlfonsoAntognozzi\\App\\ScenaGame.fxml").toURI().toURL();
+        URL gameURL = new File("\\ExamProject\\app\\src\\main\\java\\it\\unicam\\cs\\AlfonsoAntognozzi\\App\\ScenaGame.fxml").toURI().toURL();
         FXMLLoader loader = new FXMLLoader(gameURL);
         root = loader.load();
         SceneGameController sceneGameController = loader.getController();
         sceneGameController.initilizeRobot(robotGenerated);
-        URL cssURL = new File("C:\\Users\\Alfonso Antognozzi\\Progetto\\app\\src\\main\\java\\it\\unicam\\cs\\AlfonsoAntognozzi\\App\\application.css").toURI().toURL();
+        URL cssURL = new File("\\ExamProject\\app\\src\\main\\java\\it\\unicam\\cs\\AlfonsoAntognozzi\\App\\application.css").toURI().toURL();
         stage =(Stage)((Node)e.getSource()).getScene().getWindow();
         scene = new Scene(root);
         scene.getStylesheets().add(cssURL.toString());

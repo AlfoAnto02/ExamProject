@@ -5,7 +5,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="gameMap" prefHeight="800.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.unicam.cs.AlfonsoAntognozzi.App.SceneGameController">
+<AnchorPane fx:id="gameMap" minHeight="800.0" minWidth="1000.0" prefHeight="800.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.unicam.cs.AlfonsoAntognozzi.App.SceneGameController">
    <children>
       <ToolBar layoutX="110.0" layoutY="50.0" prefHeight="40.0" prefWidth="349.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="1.0" AnchorPane.topAnchor="0.0">
         <items>

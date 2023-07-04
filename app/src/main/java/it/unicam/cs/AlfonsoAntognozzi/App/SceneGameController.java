@@ -7,6 +7,7 @@ import it.unicam.cs.AlfonsoAntognozzi.model.Robot;
 import it.unicam.cs.AlfonsoAntognozzi.util.FollowMeParser;
 import it.unicam.cs.AlfonsoAntognozzi.util.FollowMeParserException;
 import it.unicam.cs.AlfonsoAntognozzi.util.Position;
+import javafx.animation.TranslateTransition;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
@@ -14,6 +15,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
+import javafx.util.Duration;
 
 import javax.swing.filechooser.FileSystemView;
 import java.io.File;
@@ -52,15 +54,13 @@ public class SceneGameController {
             double xPosition = random.nextDouble(1000);
             double yPosition = random.nextDouble(900);
             robotList.add(new Robot(new Position(xPosition,yPosition)));
-            Image image = new Image("C:\\Users\\Alfonso Antognozzi\\Progetto\\app\\src\\main\\resources\\robot che si muove.jpg");
-
+            Image image = new Image("robot che si muove.jpg");
             ImageView imageView = new ImageView(image);
-            imageView.setFitWidth(20);
-            imageView.setFitHeight(20);
+            imageView.setFitWidth(15);
+            imageView.setFitHeight(15);
             AnchorPane.setTopAnchor(imageView,yPosition);
             AnchorPane.setLeftAnchor(imageView,xPosition);
             gameMap.getChildren().add(imageView);
-
         }
     env = new Environment(robotList);
     gameParser = new FollowMeParser(new Handler(env));
@@ -90,6 +90,25 @@ public class SceneGameController {
     }
 
     public void stepForwCommand(javafx.event.ActionEvent actionEvent) {
+        if(this.env.hasNextInstruction()) {
+            this.env.executeNextIstruction();
+            for(int i = 1; i <= env.robotList().size(); i++){
+                TranslateTransition translate = new TranslateTransition();
+                translate.setDuration(Duration.millis(1000));
+                translate.setNode(gameMap.getChildren().get(i));
+                translate.setByX(env.robotList().get(i-1).getRobotPosition().getX()-gameMap.getChildren().get(i).getLayoutX());
+                translate.setByY(env.robotList().get(i-1).getRobotPosition().getY()-gameMap.getChildren().get(i).getLayoutY());
+                translate.play();
+            }
+        }
+    }
+
+    public void zoomInEvent(javafx.event.ActionEvent actionEvent){
 
     }
+
+    public void zoomOutEvent(javafx.event.ActionEvent actionEvent){
+
+    }
+
 }

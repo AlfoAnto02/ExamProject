@@ -25,6 +25,14 @@ public class Environment implements IEnvironment {
         return false;
     }
 
+    public void executeNextIstruction(){
+        if(hasNextInstruction()){
+            for(IRobot R : this.robotList){
+                if(R.getRobotController().hasNextIstruction()) R.Consume();
+            }
+        }
+    }
+
     public List<IRobot> robotList() {
         return robotList;
     }

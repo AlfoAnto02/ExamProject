@@ -21,15 +21,12 @@ public class Handler implements FollowMeParserHandler {
             R.getRobotController().getCommandList().clear();
             R.getRobotController().setProgramCounter(0);
         }
+
     }
 
     @Override
     public void parsingDone() {
-        while(this.gameEnvironment.hasNextInstruction()){
-            for(IRobot R : this.gameEnvironment.robotList()){
-                if(R.getRobotController().hasNextIstruction()) R.Consume();
-            }
-        }
+
     }
 
     @Override
