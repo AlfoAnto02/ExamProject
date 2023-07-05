@@ -5,7 +5,16 @@
     -fx-background-color: WHITE;
 }
 
-
-#stepBack{
-
+#generalMap{
+    -fx-background-color: WHITE;
 }
+
+#ButtonMenu{
+    -fx-background-color: lightgray;
+    -fx-max-height: 40;
+}
+
+
+
+
+
