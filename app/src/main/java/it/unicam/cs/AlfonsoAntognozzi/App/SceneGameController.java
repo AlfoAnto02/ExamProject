@@ -27,7 +27,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.*;
 
-public class SceneGameController {
+public class SceneGameController <R extends IRobot, S extends IShape> {
 
     @FXML
     AnchorPane generalMap;
@@ -52,8 +52,8 @@ public class SceneGameController {
     private ShapeCreator SC;
     final Stage commandChooserStage = new Stage();
     final Stage shapeChooserStage = new Stage();
-    private Environment env;
-    private List<IRobot> robotList = new ArrayList<>();
+    private Environment <R,S> env;
+    private List<Robot> robotList = new ArrayList<>();
     private FollowMeParser gameParser;
     private Point2D lastMouseLocation;;
     private List<ImageView> imageViews = new ArrayList<>();
@@ -113,16 +113,16 @@ public class SceneGameController {
 
     private void generateSelectedShapes() {
         for (int i = 0; i < env.shapeList().size(); i++) {
-            IShape S = env.shapeList().get(i);
-            if (S instanceof Rectangle) {
-                javafx.scene.shape.Rectangle R = new javafx.scene.shape.Rectangle(S.getShapePosition().getX(), S.getShapePosition().getY(),
-                        ((Rectangle) S).getWidth(), ((Rectangle) S).getHeight());
+            S Shape = env.shapeList().get(i);
+            if (Shape instanceof Rectangle) {
+                javafx.scene.shape.Rectangle R = new javafx.scene.shape.Rectangle(Shape.getShapePosition().getX(), Shape.getShapePosition().getY(),
+                        ((Rectangle) Shape).getWidth(), ((Rectangle) Shape).getHeight());
                 R.setFill(Color.TRANSPARENT);
                 R.setStroke(Color.BLACK);
                 gameMap.getChildren().add(R);
                 System.out.println("Questo è un rettangolo");
-            } else if (S instanceof Circle) {
-                javafx.scene.shape.Circle C = new javafx.scene.shape.Circle(S.getShapePosition().getX(), S.getShapePosition().getY(), ((Circle) S).getRadius());
+            } else if (Shape instanceof Circle) {
+                javafx.scene.shape.Circle C = new javafx.scene.shape.Circle(Shape.getShapePosition().getX(), Shape.getShapePosition().getY(), ((Circle) Shape).getRadius());
                 C.setFill(Color.TRANSPARENT);
                 C.setStroke(Color.BLACK);
                 gameMap.getChildren().add(C);
@@ -136,7 +136,7 @@ public class SceneGameController {
             Executor();
     }
 
-    public void autoPlay(javafx.event.ActionEvent actionEvent) throws InterruptedException {
+    public void autoPlay(javafx.event.ActionEvent actionEvent) {
         TimerTask task = new TimerTask(){
             public void run(){
                 Executor();

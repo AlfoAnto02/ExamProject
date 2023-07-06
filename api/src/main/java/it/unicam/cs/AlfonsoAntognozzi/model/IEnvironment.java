@@ -2,12 +2,12 @@ package it.unicam.cs.AlfonsoAntognozzi.model;
 
 import java.util.List;
 
-public interface IEnvironment <R extends Robot, S extends AbstracShape>{
+public interface IEnvironment <R extends IRobot, S extends IShape>{
      List<R> robotList();
 
      List<S> shapeList();
 
-     void addShapeToList(IShape S);
+     void addShapeToList(S Shape);
 
 
 }

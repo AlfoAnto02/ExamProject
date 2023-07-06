@@ -2,10 +2,8 @@ package it.unicam.cs.AlfonsoAntognozzi.io;
 
 import it.unicam.cs.AlfonsoAntognozzi.model.*;
 import it.unicam.cs.AlfonsoAntognozzi.model.Rectangle;
-import it.unicam.cs.AlfonsoAntognozzi.util.FollowMeParser;
-import it.unicam.cs.AlfonsoAntognozzi.util.FollowMeParserException;
-import it.unicam.cs.AlfonsoAntognozzi.util.Position;
-import it.unicam.cs.AlfonsoAntognozzi.util.ShapeData;
+import it.unicam.cs.AlfonsoAntognozzi.util.*;
+
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Path;

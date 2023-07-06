@@ -1,11 +1,9 @@
 package it.unicam.cs.AlfonsoAntognozzi.model.Command;
+import it.unicam.cs.AlfonsoAntognozzi.model.IRobot;
 
-import it.unicam.cs.AlfonsoAntognozzi.model.Robot;
-
-public interface ICommand <R extends Robot> {
+public interface ICommand <R extends IRobot> {
 
     void Apply (R RobotApplied);
-
 
 
 }

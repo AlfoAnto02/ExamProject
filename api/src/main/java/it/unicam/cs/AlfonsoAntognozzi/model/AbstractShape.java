@@ -1,13 +1,15 @@
 package it.unicam.cs.AlfonsoAntognozzi.model;
-import it.unicam.cs.AlfonsoAntognozzi.util.Position;
+import it.unicam.cs.AlfonsoAntognozzi.util.ICondition;
+import it.unicam.cs.AlfonsoAntognozzi.util.IPosition;
+
 
 import java.util.Objects;
 
-public abstract  class AbstracShape <P extends Position, C extends Condition> implements IShape {
+public abstract  class AbstractShape<P extends IPosition, C extends ICondition,R extends IRobot> implements IShape<P,C,R> {
     private final P shapePosition;
     private final C shapeCondition;
 
-    public AbstracShape (P position, C condition){
+    public AbstractShape(P position, C condition){
         this.shapePosition = position;
         this.shapeCondition = condition;
     }
@@ -22,7 +24,7 @@ public abstract  class AbstracShape <P extends Position, C extends Condition> im
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        AbstracShape<?, ?> that = (AbstracShape<?, ?>) o;
+        AbstractShape<?, ? , ?> that = (AbstractShape<?, ? , ?>) o;
         return Objects.equals(shapeCondition, that.shapeCondition);
     }
 

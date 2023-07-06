@@ -1,7 +1,7 @@
 package it.unicam.cs.AlfonsoAntognozzi.model.Command;
-import it.unicam.cs.AlfonsoAntognozzi.model.Robot;
+import it.unicam.cs.AlfonsoAntognozzi.model.IRobot;
 
-public class MoveCommand implements ICommand{
+public class MoveCommand <R extends IRobot> implements ICommand <R>{
     private final double x;
     private final double y;
     private final double speed;
@@ -12,7 +12,7 @@ public class MoveCommand implements ICommand{
         this.speed=args[2];
 
     }
-    public void Apply(Robot RobotApplied) {
+    public void Apply(R RobotApplied) {
         double deltaX = this.x*this.speed;
         double deltaY = this.y*this.speed;
         RobotApplied.setRobotPosition(deltaX+ RobotApplied.getRobotPosition().getX(),deltaY+ RobotApplied.getRobotPosition().getY());

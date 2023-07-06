@@ -1,10 +1,10 @@
-package it.unicam.cs.AlfonsoAntognozzi.model;
+package it.unicam.cs.AlfonsoAntognozzi.util;
 
 import java.util.Objects;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class Condition implements IShapeCondition{
+public class Condition implements ICondition {
 
     private final String label;
 

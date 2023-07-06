@@ -1,8 +1,8 @@
 package it.unicam.cs.AlfonsoAntognozzi.model.Command;
+import it.unicam.cs.AlfonsoAntognozzi.model.IRobot;
 
-import it.unicam.cs.AlfonsoAntognozzi.model.Robot;
 
-public class RepeatCommand implements ICommand{
+public class RepeatCommand <R extends IRobot> implements ICommand <R>{
     private int n;
     private final int loopLock;
     public RepeatCommand(int n){
@@ -10,7 +10,7 @@ public class RepeatCommand implements ICommand{
         this.loopLock=n;
     }
     @Override
-    public void Apply(Robot RobotApplied) {
+    public void Apply(R RobotApplied) {
         if(n==this.loopLock) {
             RobotApplied.getLoopTracker().add(RobotApplied.getRobotController().getProgramCounter());
         }

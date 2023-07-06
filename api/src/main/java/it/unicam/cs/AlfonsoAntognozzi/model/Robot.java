@@ -1,36 +1,37 @@
 package it.unicam.cs.AlfonsoAntognozzi.model;
-import it.unicam.cs.AlfonsoAntognozzi.util.Position;
+import it.unicam.cs.AlfonsoAntognozzi.util.ICondition;
+import it.unicam.cs.AlfonsoAntognozzi.util.IPosition;
 import java.util.*;
 
 
 
-public class Robot implements IRobot{
+public class Robot<P extends IPosition,C extends ICondition> implements IRobot <P,C>{
 
-    private Position robotPosition;
+    private P robotPosition;
 
-    private Condition robotCondition;
+    private C robotCondition;
     
     private final Controller robotController;
 
     private LinkedList<Integer> loopTracker = new LinkedList<>();
 
-    public Robot (Position robotPosition){
-        this.robotPosition =robotPosition;
+    public Robot (P robotPosition){
+        this.robotPosition = robotPosition;
         this.robotCondition =null;
         this.robotController= new Controller();
     }
 
-    public boolean checkDistanceBetweenRobot(List<IRobot> R, double dist){
-        double distance=dist+1;
-        for(IRobot temp : R){
-            if(!R.equals(this)) {
-                distance = Math.sqrt(Math.pow((this.getRobotPosition().getX() - temp.getRobotPosition().getX()), 2)
-                        + Math.pow((this.getRobotPosition().getY() - temp.getRobotPosition().getY()), 2));
-            }
-            if(distance<=dist) return true;
-        }
-        return false;
+    public boolean checkDistanceBetweenRobot(List<? extends IRobot> robots, double dist){
+        return robots.stream()
+                .filter(robot -> !robot.equals(this))
+                .anyMatch(robot -> {
+                    double distance = Math.sqrt(Math.pow((this.getRobotPosition().getX() - robot.getRobotPosition().getX()), 2)
+                            + Math.pow((this.getRobotPosition().getY() - robot.getRobotPosition().getY()), 2));
+                    return distance <= dist;
+                });
     }
+
+
 
     public void Consume(){
         this.getRobotController().Consume(this);
@@ -44,15 +45,15 @@ public class Robot implements IRobot{
         return loopTracker;
     }
 
-    public Position getRobotPosition(){
+    public P getRobotPosition(){
         return this.robotPosition;
     }
 
-    public Condition getRobotCondition(){
+    public C getRobotCondition(){
          return this.robotCondition;
     }
 
-    public void setRobotCondition(Condition condition){
+    public void setRobotCondition(C condition){
         this.robotCondition=condition;
     }
 

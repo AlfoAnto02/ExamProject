@@ -1,20 +1,18 @@
 package it.unicam.cs.AlfonsoAntognozzi.model.Command;
-import it.unicam.cs.AlfonsoAntognozzi.model.Condition;
+import it.unicam.cs.AlfonsoAntognozzi.util.Condition;
 import it.unicam.cs.AlfonsoAntognozzi.model.IRobot;
-import it.unicam.cs.AlfonsoAntognozzi.model.Robot;
 import it.unicam.cs.AlfonsoAntognozzi.util.Position;
-
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
+import java.util.stream.Collectors;
 
-public class FollowLabelCommand implements ICommand{
+public class FollowLabelCommand <R extends IRobot> implements ICommand <R>{
     private final double[] args;
-    private final List<IRobot> robotList;
+    private final List<R> robotList;
     private final String label;
     private final double speed;
 
-    public FollowLabelCommand(String label, double[] args, List<IRobot> robotList){
+    public FollowLabelCommand(String label, double[] args, List<R> robotList){
         this.args = args;
         this.robotList=robotList;
         this.label=label;
@@ -22,26 +20,26 @@ public class FollowLabelCommand implements ICommand{
     }
 
     @Override
-    public void Apply(Robot RobotApplied) {
-        List<IRobot> tempRobList = new ArrayList<>();
-        List<IRobot> toRemove = new ArrayList<>();
-        for(IRobot R : this.robotList){ if(R.getRobotCondition()!=null && R.getRobotCondition().equals(new Condition(label))) tempRobList.add(R); }
-        if (tempRobList.size()<=1) this.callFollowRandomCommand(RobotApplied);
-        double avgX = 0; double avgY = 0; double dist = args[0];
-        for (IRobot R : tempRobList) {
-            if (!R.checkDistanceBetweenRobot(tempRobList, dist)) toRemove.add(R);
-            else {
-                avgX += R.getRobotPosition().getX();
-                avgY += R.getRobotPosition().getY();
-            }
+    public void Apply(R RobotApplied) {
+        List<R> tempRobList = robotList.stream()
+                .filter(robot -> robot.getRobotCondition() != null && robot.getRobotCondition().equals(new Condition(label)))
+                .collect(Collectors.toList());
+        if (tempRobList.size()<=1) {
+            this.callFollowRandomCommand(RobotApplied);
+            return;
         }
+        double avgX = tempRobList.stream().mapToDouble(robot->robot.getRobotPosition().getX()).sum();
+        double avgY = tempRobList.stream().mapToDouble(robot->robot.getRobotPosition().getY()).sum();
+        List<R> toRemove = tempRobList.stream()
+                .filter(robot -> !robot.checkDistanceBetweenRobot(tempRobList, args[0]))
+                .collect(Collectors.toList());
         tempRobList.removeAll(toRemove);
         if(tempRobList.size()>1) this.callFollowCommand(new Position(avgX/tempRobList.size(), avgY/tempRobList.size()), RobotApplied);
         else this.callFollowRandomCommand(RobotApplied);
         tempRobList.clear(); toRemove.clear();
     }
 
-    private void callFollowCommand(Position position, Robot RobotApplied) {
+    private void callFollowCommand(Position position, R RobotApplied) {
         double x = position.getX();
         double y = position.getY();
         double deltaX = x*this.speed;
@@ -49,7 +47,7 @@ public class FollowLabelCommand implements ICommand{
         RobotApplied.setRobotPosition(deltaX+ RobotApplied.getRobotPosition().getX(), deltaY+ RobotApplied.getRobotPosition().getY());
         }
 
-        private void callFollowRandomCommand(Robot RobotApplied){
+        private void callFollowRandomCommand(R RobotApplied){
             Random random = new Random();
             double x1 = args[0];
             double x2 = -args[0];

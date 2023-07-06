@@ -1,10 +1,11 @@
 package it.unicam.cs.AlfonsoAntognozzi.model.Command;
 
-import it.unicam.cs.AlfonsoAntognozzi.model.Robot;
+import it.unicam.cs.AlfonsoAntognozzi.model.IRobot;
 
-public class StopCommand implements ICommand{
+
+public class StopCommand <R extends IRobot> implements ICommand <R>{
     @Override
-    public void Apply(Robot RobotApplied) {
+    public void Apply(R RobotApplied) {
         RobotApplied.getRobotController().getCommandList().clear();
     }
 }

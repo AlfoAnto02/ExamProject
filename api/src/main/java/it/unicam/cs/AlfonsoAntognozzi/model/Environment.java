@@ -3,41 +3,39 @@ package it.unicam.cs.AlfonsoAntognozzi.model;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Environment implements IEnvironment {
+public class Environment<R extends IRobot, S extends IShape> implements IEnvironment<R,S> {
 
-    private final List<IShape> shapeList;
+    private final List<S> shapeList;
 
-    private final List<IRobot> robotList;
+    private final List<R> robotList;
 
-    public Environment (List<IRobot> robotList){
+    public Environment (List<R> robotList){
         this.shapeList = new ArrayList<>();
         this.robotList=robotList;
     }
 
-    public void addShapeToList(IShape S) {
-        this.shapeList.add(S);
+    public void addShapeToList(S Shape) {
+        this.shapeList.add(Shape);
     }
 
     public boolean hasNextInstruction(){
-        for(IRobot R : this.robotList){
-            if (R.getRobotController().hasNextIstruction()) return true;
-        }
-        return false;
+        return robotList.stream()
+                .anyMatch(robot -> robot.getRobotController().hasNextIstruction());
     }
 
     public void executeNextIstruction(){
-        if(hasNextInstruction()){
-            for(IRobot R : this.robotList){
-                if(R.getRobotController().hasNextIstruction()) R.Consume();
+        robotList.forEach(robot -> {
+            if (robot.getRobotController().hasNextIstruction()) {
+                robot.Consume();
             }
-        }
+        });
     }
 
-    public List<IRobot> robotList() {
+    public List<R> robotList() {
         return robotList;
     }
 
-    public List<IShape> shapeList() {
+    public List<S> shapeList() {
         return shapeList;
     }
 

@@ -1,21 +1,23 @@
 package it.unicam.cs.AlfonsoAntognozzi.model;
-import it.unicam.cs.AlfonsoAntognozzi.util.Position;
+import it.unicam.cs.AlfonsoAntognozzi.util.ICondition;
+import it.unicam.cs.AlfonsoAntognozzi.util.IPosition;
 import java.util.LinkedList;
 import java.util.List;
 
-public interface IRobot {
-     Position getRobotPosition();
+public interface IRobot<P extends IPosition,C extends ICondition> {
+     P getRobotPosition();
 
-     Condition getRobotCondition();
+     C getRobotCondition();
 
-     void setRobotCondition(Condition condition);
+     void setRobotCondition(C condition);
 
      LinkedList<Integer> getLoopTracker();
 
-     boolean checkDistanceBetweenRobot(List<IRobot> R, double dist);
+     boolean checkDistanceBetweenRobot(List<? extends IRobot> RobotList, double dist);
 
      Controller getRobotController();
 
      void Consume();
 
+     void setRobotPosition(double v, double v1);
 }

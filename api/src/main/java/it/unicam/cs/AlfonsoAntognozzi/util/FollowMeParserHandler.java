@@ -1,5 +1,7 @@
 package it.unicam.cs.AlfonsoAntognozzi.util;
 
+import it.unicam.cs.AlfonsoAntognozzi.model.IRobot;
+
 /**
  * This interface is implemented to handle parsing of robot programs. Instances of this interface
  * will be used as follows:
@@ -13,7 +15,7 @@ package it.unicam.cs.AlfonsoAntognozzi.util;
  *
  */
 
-public interface FollowMeParserHandler<T extends Object> {
+public interface FollowMeParserHandler <R extends IRobot> {
     /**
      * This method is the method that is invoked ad the beginning of the parse procedure.
      */

@@ -1,15 +1,16 @@
 package it.unicam.cs.AlfonsoAntognozzi.model.Command;
 
-import it.unicam.cs.AlfonsoAntognozzi.model.Condition;
-import it.unicam.cs.AlfonsoAntognozzi.model.Robot;
+import it.unicam.cs.AlfonsoAntognozzi.model.IRobot;
+import it.unicam.cs.AlfonsoAntognozzi.util.ICondition;
 
-public class SignalCommand implements ICommand{
-    private final Condition label;
-    public SignalCommand(Condition l){
+
+public class SignalCommand <R extends IRobot, C extends ICondition> implements ICommand <R>{
+    private final C label;
+    public SignalCommand(C l){
         this.label=l;
     }
     @Override
-    public void Apply(Robot RobotApplied) {
+    public void Apply(R RobotApplied) {
         RobotApplied.setRobotCondition(this.label);
     }
 }

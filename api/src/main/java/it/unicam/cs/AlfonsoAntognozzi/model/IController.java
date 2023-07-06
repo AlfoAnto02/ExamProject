@@ -5,9 +5,9 @@ import it.unicam.cs.AlfonsoAntognozzi.model.Command.ICommand;
 
 import java.util.List;
 
-public interface IController <R extends ICommand> {
+public interface IController <C extends ICommand, R extends IRobot> {
 
-    List<R> getCommandList();
+    List<C> getCommandList();
 
     int getProgramCounter();
 
@@ -15,11 +15,11 @@ public interface IController <R extends ICommand> {
 
     void skipUntilInstruction();
 
-    void addCommand(R C);
+    void addCommand(C Command);
 
     boolean hasNextIstruction();
 
-    public void Consume (Robot R);
+    public void Consume (R Robot);
 
     
 

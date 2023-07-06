@@ -1,10 +1,9 @@
 package it.unicam.cs.AlfonsoAntognozzi.model.Command;
+import it.unicam.cs.AlfonsoAntognozzi.model.IRobot;
 
-import it.unicam.cs.AlfonsoAntognozzi.model.Robot;
-
-public class DoForeverCommand implements ICommand {
+public class DoForeverCommand <R extends IRobot> implements ICommand <R>{
     @Override
-    public void Apply(Robot RobotApplied) {
+    public void Apply(R RobotApplied) {
         RobotApplied.getLoopTracker().add(RobotApplied.getRobotController().getProgramCounter());
     }
 }

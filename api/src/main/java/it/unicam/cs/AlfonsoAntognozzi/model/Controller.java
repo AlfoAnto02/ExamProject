@@ -9,9 +9,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Stack;
 
-public class Controller implements IController{
+public class Controller <C extends ICommand, R extends IRobot> implements IController <C,R>{
 
-    private final List<ICommand> commandList;
+    private final List<C> commandList;
     private int programCounter;
 
     public Controller(){
@@ -19,27 +19,27 @@ public class Controller implements IController{
         this.programCounter=0;
     }
 
-    public void addCommand(ICommand C){
-        this.getCommandList().add(C);
+    public void addCommand(C Command){
+        this.getCommandList().add(Command);
     }
 
     public void increaseProgramCounter(){
         this.programCounter++;
     }
 
-    public void Consume (Robot R){
-        this.commandList.get(programCounter).Apply(R);
+    public void Consume (R Robot){
+        this.commandList.get(programCounter).Apply(Robot);
         this.increaseProgramCounter();
     }
 
 
     public void skipUntilInstruction() {
-        List<ICommand> sublist = this.commandList.subList(this.programCounter,this.commandList.size());
-        Stack<ICommand> stack = new Stack<>();
+        List<C> sublist = this.commandList.subList(this.programCounter,this.commandList.size());
+        Stack<C> stack = new Stack<>();
         this.programCounter--;
-        for (ICommand C : sublist) {
-            if(C instanceof UntilCommand || C instanceof RepeatCommand) stack.push(C);
-            else if(C instanceof DoneCommand) stack.pop();
+        for (C Command : sublist) {
+            if(Command instanceof UntilCommand || Command instanceof RepeatCommand) stack.push(Command);
+            else if(Command instanceof DoneCommand) stack.pop();
             if(stack.isEmpty()) break;
             this.programCounter++;
         }
@@ -47,11 +47,10 @@ public class Controller implements IController{
     }
 
     public boolean hasNextIstruction(){
-        if(this.programCounter<this.commandList.size()) return true;
-        return false;
+        return this.programCounter < this.commandList.size();
     }
 
-    public List<ICommand> getCommandList() {
+    public List<C> getCommandList() {
         return this.commandList;
     }
 

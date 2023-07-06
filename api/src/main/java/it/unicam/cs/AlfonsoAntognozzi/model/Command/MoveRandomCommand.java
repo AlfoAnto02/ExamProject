@@ -1,10 +1,10 @@
 package it.unicam.cs.AlfonsoAntognozzi.model.Command;
 
-import it.unicam.cs.AlfonsoAntognozzi.model.Robot;
+import it.unicam.cs.AlfonsoAntognozzi.model.IRobot;
 
 import java.util.Random;
 
-public class MoveRandomCommand implements ICommand{
+public class MoveRandomCommand  <R extends IRobot> implements ICommand <R>{
     private final double x1;
     private final double x2;
     private final double y1;
@@ -19,7 +19,7 @@ public class MoveRandomCommand implements ICommand{
         this.speed=args[4];
     }
     @Override
-    public void Apply(Robot RobotApplied) {
+    public void Apply(R RobotApplied) {
         Random random = new Random();
         double targetX = this.x1+ (this.x2-this.x1) * random.nextDouble();
         double targetY = this.y1 + (this.y2-this.y1) * random.nextDouble();
