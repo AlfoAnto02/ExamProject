@@ -8,7 +8,7 @@ repositories {
 }
 
 dependencies {
-implementation project(path: ':api')
+implementation project(':api')
 }
 
 javafx {
@@ -16,4 +16,6 @@ javafx {
     modules = [ 'javafx.controls', 'javafx.fxml' ]
 }
 
-mainClassName = 'org.openjfx.MainApp'
+application {
+    mainClassName = 'it.unicam.cs.AlfonsoAntognozzi.App.App'
+}

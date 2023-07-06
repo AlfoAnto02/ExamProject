@@ -13,7 +13,5 @@ plugins {
 }
 
 rootProject.name = 'Progetto'
-include('app')
-include 'api'
-include 'utilities'
+include('app','api','utilities')
 

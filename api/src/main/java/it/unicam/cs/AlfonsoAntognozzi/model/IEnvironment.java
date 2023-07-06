@@ -7,5 +7,7 @@ public interface IEnvironment <R extends Robot, S extends AbstracShape>{
 
      List<S> shapeList();
 
+     void addShapeToList(IShape S);
+
 
 }
