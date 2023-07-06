@@ -5,47 +5,52 @@
 <?import javafx.scene.control.ToolBar?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
 <AnchorPane fx:id="generalMap" minHeight="800.0" minWidth="1000.0" prefHeight="800.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.unicam.cs.AlfonsoAntognozzi.App.SceneGameController">
    <children>
-      <ToolBar fx:id="ButtonMenu" layoutX="110.0" layoutY="50.0" prefHeight="40.0" prefWidth="349.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="1.0" AnchorPane.topAnchor="0.0">
-        <items>
-          <Button fx:id="zoomIn" mnemonicParsing="false" onAction="#zoomInEvent" text="+">
-               <font>
-                  <Font name="Times New Roman Bold Italic" size="15.0" />
-               </font>
-            </Button>
-            <Button fx:id="zommOut" alignment="TOP_CENTER" contentDisplay="TOP" mnemonicParsing="false" onAction="#zoomOutEvent" text="-">
-               <font>
-                  <Font name="Times New Roman Bold Italic" size="15.0" />
-               </font>
-            </Button>
-            <Button fx:id="addShapes" mnemonicParsing="false" onAction="#addShapesToGame" text="AddShapes">
-               <font>
-                  <Font name="Times New Roman Bold Italic" size="15.0" />
-               </font>
-            </Button>
-            <Button fx:id="addCommand" mnemonicParsing="false" onAction="#addCommandToGame" text="AddCommand">
-               <font>
-                  <Font name="Times New Roman Bold Italic" size="15.0" />
-               </font>
-            </Button>
-            <Button fx:id="stepBack" mnemonicParsing="false" text="SB">
-               <font>
-                  <Font name="Times New Roman Bold Italic" size="15.0" />
-               </font>
-            </Button>
-            <Button fx:id="stepForw" mnemonicParsing="false" onAction="#stepForwCommand" text="SF">
-               <font>
-                  <Font name="Times New Roman Bold Italic" size="15.0" />
-               </font>
-            </Button>
-        </items>
-         <padding>
-            <Insets left="10.0" right="10.0" />
-         </padding>
-      </ToolBar>
-      <Pane fx:id="gameMap" layoutY="40.0" prefHeight="760.0" prefWidth="1000.0" />
+      <Pane fx:id="gameMap" layoutY="39.0" onMouseDragged="#handleMouseDragged" onMousePressed="#handleMousePressed" onScroll="#handleScroll" prefHeight="763.0" prefWidth="1000.0" />
+      <VBox fx:id="ToolMenu" prefHeight="40.0" prefWidth="1000.0">
+         <children>
+            <ToolBar fx:id="ButtonMenu" prefHeight="40.0" prefWidth="349.0">
+              <items>
+                <Button fx:id="zoomIn" mnemonicParsing="false" onAction="#zoomInEvent" onKeyPressed="#handleKeyPress" text="+">
+                     <font>
+                        <Font name="Calibri Bold" size="15.0" />
+                     </font>
+                  </Button>
+                  <Button fx:id="zommOut" alignment="TOP_CENTER" contentDisplay="TOP" mnemonicParsing="false" onAction="#zoomOutEvent" onKeyPressed="#handleKeyPress" text="-">
+                     <font>
+                        <Font name="Calibri Bold" size="15.0" />
+                     </font>
+                  </Button>
+                  <Button fx:id="addShapes" mnemonicParsing="false" onAction="#addShapesToGame" text="AddShapes">
+                     <font>
+                        <Font name="Calibri Bold" size="15.0" />
+                     </font>
+                  </Button>
+                  <Button fx:id="addCommand" mnemonicParsing="false" onAction="#addCommandToGame" text="AddCommand">
+                     <font>
+                        <Font name="Calibri Bold" size="15.0" />
+                     </font>
+                  </Button>
+                  <Button fx:id="stepForw" mnemonicParsing="false" onAction="#stepForwCommand" text="StepForward">
+                     <font>
+                        <Font name="Calibri Bold" size="15.0" />
+                     </font>
+                  </Button>
+                  <Button fx:id="AutoPlay" mnemonicParsing="false" onAction="#autoPlay" text="Auto-Play">
+                     <font>
+                        <Font name="Calibri Bold" size="15.0" />
+                     </font>
+                  </Button>
+              </items>
+               <padding>
+                  <Insets left="10.0" right="10.0" />
+               </padding>
+            </ToolBar>
+         </children>
+      </VBox>
    </children>
 </AnchorPane>

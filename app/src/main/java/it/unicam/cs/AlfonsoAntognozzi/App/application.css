@@ -10,9 +10,29 @@
 }
 
 #ButtonMenu{
-    -fx-background-color: lightgray;
+    -fx-background-color: LightGray;
+}
+#ToolMenu{
     -fx-max-height: 40;
 }
+
+#robotLable{
+    -fx-border-width: 2;
+    -fx-border-radius: 50%;
+    -fx-text-fill: BLACK;
+    -fx-border-color: BLACK;
+    -fx-font-family: Calibri;
+}
+
+#nextSceneButton{
+    -fx-border-radius: 25%;
+    -fx-border-width: 3;
+    -fx-border-color: BLACK;
+    -fx-background-color: WHITE;
+    -fx-font-family: Calibri;
+}
+
+
 
 
 

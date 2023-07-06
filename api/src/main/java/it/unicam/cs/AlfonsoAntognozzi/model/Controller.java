@@ -36,6 +36,7 @@ public class Controller implements IController{
     public void skipUntilInstruction() {
         List<ICommand> sublist = this.commandList.subList(this.programCounter,this.commandList.size());
         Stack<ICommand> stack = new Stack<>();
+        this.programCounter--;
         for (ICommand C : sublist) {
             if(C instanceof UntilCommand || C instanceof RepeatCommand) stack.push(C);
             else if(C instanceof DoneCommand) stack.pop();

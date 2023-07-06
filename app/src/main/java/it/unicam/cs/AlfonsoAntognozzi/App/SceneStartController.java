@@ -8,6 +8,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import java.io.File;
 import java.io.IOException;
@@ -33,26 +34,26 @@ public class SceneStartController {
         try {
             if (Integer.parseInt(robotField.getText().toString()) < 0) {
                 robotLable.setText("HAI SCELTO UN VALORE TROPPO BASSO, SCEGLILO > DI 0");
-                nextSceneButton.setStyle("-fx-background-color: #ff0000;");
+                nextSceneButton.setTextFill(Color.RED);
             } else if (Integer.parseInt(robotField.getText()) > 200) {
                 robotLable.setText("HAI SCELTO UN VALORE TROPPO ALTO, SCEGLILO < DI 200");
-                nextSceneButton.setStyle("-fx-background-color: #ff0000;");
+                nextSceneButton.setTextFill(Color.RED);
             } else {
-                nextSceneButton.setStyle("-fx-background-color: #1ef600;");
+                nextSceneButton.setTextFill(Color.GREEN);
                 robotLable.setText("HAI SCELTO " + robotField.getText() + " ROBOT!!!");
             }
         }catch(NumberFormatException num){
             robotLable.setText("SCEGLI UN NUMERO NON UNA CIFRA!!!");
-            nextSceneButton.setStyle("-fx-background-color: #ff0000;");
+            nextSceneButton.setTextFill(Color.RED);
         }
 
 
     }
     public void next(ActionEvent e) throws InterruptedException, IOException {
-        if(nextSceneButton.getStyle().equals("-fx-background-color: #ff0000;")){
+        if(nextSceneButton.getTextFill().equals(Color.RED)){
             errorLabel.setOpacity(1.0);
         }
-        else if (nextSceneButton.getStyle().equals("-fx-background-color: #1ef600;")){
+        else if (nextSceneButton.getTextFill().equals(Color.GREEN)){
             robotGenerated=Integer.parseInt(robotField.getText());
             connectToSecondScene(e);
         }
@@ -64,7 +65,7 @@ public class SceneStartController {
         FXMLLoader loader = new FXMLLoader(gameURL);
         root = loader.load();
         SceneGameController sceneGameController = loader.getController();
-        sceneGameController.initilizeRobot(robotGenerated);
+        sceneGameController.initializeRobot(robotGenerated);
         URL cssURL = new File("\\ExamProject\\app\\src\\main\\java\\it\\unicam\\cs\\AlfonsoAntognozzi\\App\\application.css").toURI().toURL();
         stage =(Stage)((Node)e.getSource()).getScene().getWindow();
         scene = new Scene(root);
