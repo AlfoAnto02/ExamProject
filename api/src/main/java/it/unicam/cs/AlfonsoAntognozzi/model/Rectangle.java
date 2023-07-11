@@ -2,7 +2,7 @@ package it.unicam.cs.AlfonsoAntognozzi.model;
 import it.unicam.cs.AlfonsoAntognozzi.util.ICondition;
 import it.unicam.cs.AlfonsoAntognozzi.util.IPosition;
 
-public class Rectangle <P extends IPosition, C extends ICondition, R extends IRobot> extends AbstractShape <P,C,R> {
+public class Rectangle <P extends IPosition, C extends ICondition, R extends IRobot<P,C>> extends AbstractShape <P,C,R> {
     private final double height;
     private final double width;
     public Rectangle(P position, C condition, double height, double width) {

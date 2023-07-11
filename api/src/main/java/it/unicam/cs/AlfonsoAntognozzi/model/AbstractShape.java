@@ -5,7 +5,7 @@ import it.unicam.cs.AlfonsoAntognozzi.util.IPosition;
 
 import java.util.Objects;
 
-public abstract  class AbstractShape<P extends IPosition, C extends ICondition,R extends IRobot> implements IShape<P,C,R> {
+public abstract  class AbstractShape<P extends IPosition, C extends ICondition,R extends IRobot<P,C>> implements IShape<P,C,R> {
     private final P shapePosition;
     private final C shapeCondition;
 

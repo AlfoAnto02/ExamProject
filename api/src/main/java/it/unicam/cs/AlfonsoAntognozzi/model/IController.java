@@ -2,10 +2,12 @@ package it.unicam.cs.AlfonsoAntognozzi.model;
 
 
 import it.unicam.cs.AlfonsoAntognozzi.model.Command.ICommand;
+import it.unicam.cs.AlfonsoAntognozzi.util.ICondition;
+import it.unicam.cs.AlfonsoAntognozzi.util.IPosition;
 
 import java.util.List;
 
-public interface IController <C extends ICommand, R extends IRobot> {
+public interface IController <C extends ICommand, R extends IRobot<IPosition, ICondition>> {
 
     List<C> getCommandList();
 
@@ -19,11 +21,5 @@ public interface IController <C extends ICommand, R extends IRobot> {
 
     boolean hasNextIstruction();
 
-    public void Consume (R Robot);
-
-    
-
-
-
-
+    void Consume (R Robot);
 }

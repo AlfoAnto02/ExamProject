@@ -1,10 +1,12 @@
 package it.unicam.cs.AlfonsoAntognozzi.model.Command;
-
 import it.unicam.cs.AlfonsoAntognozzi.model.IRobot;
 import it.unicam.cs.AlfonsoAntognozzi.model.IShape;
+import it.unicam.cs.AlfonsoAntognozzi.util.ICondition;
+import it.unicam.cs.AlfonsoAntognozzi.util.IPosition;
+
 import java.util.List;
 
-public class UntilCommand <R extends IRobot, S extends IShape> implements ICommand <R>{
+public class UntilCommand <R extends IRobot<IPosition, ICondition>, S extends IShape<IPosition,ICondition,R>> implements ICommand <R>{
     private int loopLocker;
     private final List<S> checkedShapeList;
 

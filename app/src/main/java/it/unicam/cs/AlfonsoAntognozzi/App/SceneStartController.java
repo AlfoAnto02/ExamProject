@@ -49,7 +49,7 @@ public class SceneStartController {
 
 
     }
-    public void next(ActionEvent e) throws InterruptedException, IOException {
+    public void next(ActionEvent e) throws IOException {
         if(nextSceneButton.getTextFill().equals(Color.RED)){
             errorLabel.setOpacity(1.0);
         }

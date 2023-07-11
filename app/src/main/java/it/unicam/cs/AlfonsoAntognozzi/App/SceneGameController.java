@@ -49,13 +49,13 @@ public class SceneGameController <R extends IRobot, S extends IShape> {
     VBox ToolMenu;
     private static final double ZOOM_FACTOR = 0.1;
     private double zoomLevel;
-    private ShapeCreator SC;
+    private ShapeCreator<S> SC;
     final Stage commandChooserStage = new Stage();
     final Stage shapeChooserStage = new Stage();
     private Environment <R,S> env;
-    private List<Robot> robotList = new ArrayList<>();
+    private final List<Robot> robotList = new ArrayList<>();
     private FollowMeParser gameParser;
-    private Point2D lastMouseLocation;;
+    private Point2D lastMouseLocation;
     private List<ImageView> imageViews = new ArrayList<>();
 
 

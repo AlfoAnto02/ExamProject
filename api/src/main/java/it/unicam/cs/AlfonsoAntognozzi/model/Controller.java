@@ -4,12 +4,14 @@ import it.unicam.cs.AlfonsoAntognozzi.model.Command.ICommand;
 import it.unicam.cs.AlfonsoAntognozzi.model.Command.DoneCommand;
 import it.unicam.cs.AlfonsoAntognozzi.model.Command.RepeatCommand;
 import it.unicam.cs.AlfonsoAntognozzi.model.Command.UntilCommand;
+import it.unicam.cs.AlfonsoAntognozzi.util.ICondition;
+import it.unicam.cs.AlfonsoAntognozzi.util.IPosition;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Stack;
 
-public class Controller <C extends ICommand, R extends IRobot> implements IController <C,R>{
+public class Controller <C extends ICommand<R>, R extends IRobot<IPosition, ICondition>> implements IController <C,R>{
 
     private final List<C> commandList;
     private int programCounter;

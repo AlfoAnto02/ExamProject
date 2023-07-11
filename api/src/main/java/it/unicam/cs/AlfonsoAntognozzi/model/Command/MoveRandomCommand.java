@@ -1,10 +1,12 @@
 package it.unicam.cs.AlfonsoAntognozzi.model.Command;
 
 import it.unicam.cs.AlfonsoAntognozzi.model.IRobot;
+import it.unicam.cs.AlfonsoAntognozzi.util.ICondition;
+import it.unicam.cs.AlfonsoAntognozzi.util.IPosition;
 
 import java.util.Random;
 
-public class MoveRandomCommand  <R extends IRobot> implements ICommand <R>{
+public class MoveRandomCommand  <R extends IRobot<IPosition, ICondition>> implements ICommand <R>{
     private final double x1;
     private final double x2;
     private final double y1;

@@ -3,8 +3,6 @@ import it.unicam.cs.AlfonsoAntognozzi.util.ICondition;
 import it.unicam.cs.AlfonsoAntognozzi.util.IPosition;
 import java.util.*;
 
-
-
 public class Robot<P extends IPosition,C extends ICondition> implements IRobot <P,C>{
 
     private P robotPosition;
@@ -12,16 +10,15 @@ public class Robot<P extends IPosition,C extends ICondition> implements IRobot <
     private C robotCondition;
     
     private final Controller robotController;
-
     private LinkedList<Integer> loopTracker = new LinkedList<>();
 
     public Robot (P robotPosition){
         this.robotPosition = robotPosition;
         this.robotCondition =null;
-        this.robotController= new Controller();
+        this.robotController= new Controller<>();
     }
 
-    public boolean checkDistanceBetweenRobot(List<? extends IRobot> robots, double dist){
+    public boolean checkDistanceBetweenRobot(List<? extends IRobot<P,C>> robots, double dist){
         return robots.stream()
                 .filter(robot -> !robot.equals(this))
                 .anyMatch(robot -> {
