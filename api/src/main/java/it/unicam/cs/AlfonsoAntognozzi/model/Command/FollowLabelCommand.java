@@ -8,46 +8,64 @@ import java.util.List;
 import java.util.Random;
 import java.util.stream.Collectors;
 
+/***
+ * This class implements the ICommand interface and its task is to apply the followLabelCommand.
+ *
+ * @param <R> type of robot
+ */
 public class FollowLabelCommand <R extends IRobot<IPosition, ICondition>> implements ICommand <R>{
-    private final double[] args;
-    private final List<R> robotList;
-    private final String label;
+    private final double[] args; //arguments of the followLabelCommand
+    private final List<R> robotList; //current list of robot of the Environment
+    private final String label; //Label that the followed robots should signal
     private final double speed;
 
     public FollowLabelCommand(String label, double[] args, List<R> robotList){
         this.args = args;
-        this.robotList=robotList;
-        this.label=label;
-        this.speed=args[1];
+        this.robotList = robotList;
+        this.label = label;
+        this.speed = args[1];
     }
 
+    /*
+       tempRobList is the list of robots that are actually signaling a given label.
+       In case the robots that are signaling the label are < 2 then the method will call the private
+       callFollowRandomCommand() method that will generate a random position between (dist,-dist) (dist,-dist)
+       The logic behind this is that (as it is written in the schematics of the project) it is impossible to calculate
+       the avg position of the robots that "dist" (where dist is a variable indicating the distance between a robot and
+       another robot) meters apart if only 1 robot is present.
+       Otherwise, the method will continue calculating the avg x and y and eliminating the robots that aren't "dist" meters apart.
+     */
     @Override
-    public void Apply(R RobotApplied) {
+    public void apply(R robotApplied) {
         List<R> tempRobList = robotList.stream()
                 .filter(robot -> robot.getRobotCondition() != null && robot.getRobotCondition().equals(new Condition(label)))
                 .collect(Collectors.toList());
-        if (tempRobList.size()<=1) {
-            this.callFollowRandomCommand(RobotApplied);
+        if (tempRobList.size() <= 1) {
+            this.callFollowRandomCommand(robotApplied);
             return;
         }
         double avgX = tempRobList.stream().mapToDouble(robot->robot.getRobotPosition().getX()).sum();
         double avgY = tempRobList.stream().mapToDouble(robot->robot.getRobotPosition().getY()).sum();
         List<R> toRemove = tempRobList.stream()
                 .filter(robot -> !robot.checkDistanceBetweenRobot(tempRobList, args[0]))
-                .collect(Collectors.toList());
+                .toList();
         tempRobList.removeAll(toRemove);
-        if(tempRobList.size()>1) this.callFollowCommand(new Position(avgX/tempRobList.size(), avgY/tempRobList.size()), RobotApplied);
-        else this.callFollowRandomCommand(RobotApplied);
-        tempRobList.clear(); toRemove.clear();
+        if(tempRobList.size() > 1) this.callFollowCommand(new Position(avgX/tempRobList.size(), avgY/tempRobList.size()), robotApplied);
+        else this.callFollowRandomCommand(robotApplied);
     }
 
-    private void callFollowCommand(Position position, R RobotApplied) {
-        double x = position.getX();
-        double y = position.getY();
-        double deltaX = x*this.speed;
-        double deltaY = y*this.speed;
-        RobotApplied.setRobotPosition(deltaX+ RobotApplied.getRobotPosition().getX(), deltaY+ RobotApplied.getRobotPosition().getY());
+    /***
+     *
+     * @param position The avg position of robot Signaling the label and "dist" meters apart
+     * @param robotApplied
+     */
+
+    private void callFollowCommand(Position position, R robotApplied) {
+        double deltaX = position.getX() * this.speed;
+        double deltaY = position.getY() * this.speed;
+        robotApplied.setRobotPosition(deltaX+ robotApplied.getRobotPosition().getX(), deltaY+ robotApplied.getRobotPosition().getY());
         }
+
 
         private void callFollowRandomCommand(R RobotApplied){
             Random random = new Random();
@@ -55,11 +73,11 @@ public class FollowLabelCommand <R extends IRobot<IPosition, ICondition>> implem
             double x2 = -args[0];
             double y1 = args[0];
             double y2 = -args[0];
-            double targetX = x1+ (x2-x1) * random.nextDouble();
-            double targetY = y1 + (y2-y1) * random.nextDouble();
-            double deltaX = Math.signum(targetX- RobotApplied.getRobotPosition().getX()) * this.speed;
-            double deltaY = Math.signum(targetY- RobotApplied.getRobotPosition().getY()) * this.speed;
-            RobotApplied.setRobotPosition(deltaX+ RobotApplied.getRobotPosition().getX(),deltaY+ RobotApplied.getRobotPosition().getY());
+            double targetX = x1+ (x2 - x1) * random.nextDouble();
+            double targetY = y1 + (y2 - y1) * random.nextDouble();
+            double deltaX = Math.signum(targetX - RobotApplied.getRobotPosition().getX()) * this.speed;
+            double deltaY = Math.signum(targetY - RobotApplied.getRobotPosition().getY()) * this.speed;
+            RobotApplied.setRobotPosition(deltaX + RobotApplied.getRobotPosition().getX(),deltaY + RobotApplied.getRobotPosition().getY());
         }
 }
 

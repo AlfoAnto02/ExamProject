@@ -12,25 +12,21 @@ import java.util.List;
 import java.util.Stack;
 
 public class Controller <C extends ICommand<R>, R extends IRobot<IPosition, ICondition>> implements IController <C,R>{
-
     private final List<C> commandList;
     private int programCounter;
-
     public Controller(){
         this.commandList=new ArrayList<>();
         this.programCounter=0;
     }
-
     public void addCommand(C Command){
         this.getCommandList().add(Command);
     }
-
     public void increaseProgramCounter(){
         this.programCounter++;
     }
 
-    public void Consume (R Robot){
-        this.commandList.get(programCounter).Apply(Robot);
+    public void consume(R robot){
+        this.commandList.get(programCounter).apply(robot);
         this.increaseProgramCounter();
     }
 
@@ -39,16 +35,16 @@ public class Controller <C extends ICommand<R>, R extends IRobot<IPosition, ICon
         List<C> sublist = this.commandList.subList(this.programCounter,this.commandList.size());
         Stack<C> stack = new Stack<>();
         this.programCounter--;
-        for (C Command : sublist) {
-            if(Command instanceof UntilCommand || Command instanceof RepeatCommand) stack.push(Command);
-            else if(Command instanceof DoneCommand) stack.pop();
+        for (C command : sublist) {
+            if(command instanceof UntilCommand || command instanceof RepeatCommand) stack.push(command);
+            else if(command instanceof DoneCommand) stack.pop();
             if(stack.isEmpty()) break;
             this.programCounter++;
         }
 
     }
 
-    public boolean hasNextIstruction(){
+    public boolean hasNextInstruction(){
         return this.programCounter < this.commandList.size();
     }
 
@@ -62,8 +58,8 @@ public class Controller <C extends ICommand<R>, R extends IRobot<IPosition, ICon
     }
 
     @Override
-    public void setProgramCounter(int n) {
-        this.programCounter=n;
+    public void setProgramCounter(int newProgramCounter) {
+        this.programCounter=newProgramCounter;
     }
 
 }

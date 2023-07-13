@@ -25,14 +25,11 @@ public class SceneStartController {
     @FXML
     Label errorLabel;
 
-    private Stage stage;
-    private Scene scene;
-    private Parent root;
     private int robotGenerated;
 
     public void changeRobotLable(ActionEvent e) {
         try {
-            if (Integer.parseInt(robotField.getText().toString()) < 0) {
+            if (Integer.parseInt(robotField.getText()) < 0) {
                 robotLable.setText("HAI SCELTO UN VALORE TROPPO BASSO, SCEGLILO > DI 0");
                 nextSceneButton.setTextFill(Color.RED);
             } else if (Integer.parseInt(robotField.getText()) > 200) {
@@ -63,12 +60,12 @@ public class SceneStartController {
     private void connectToSecondScene(ActionEvent e) throws IOException {
         URL gameURL = new File("\\ExamProject\\app\\src\\main\\java\\it\\unicam\\cs\\AlfonsoAntognozzi\\App\\ScenaGame.fxml").toURI().toURL();
         FXMLLoader loader = new FXMLLoader(gameURL);
-        root = loader.load();
+        Parent root = loader.load();
         SceneGameController sceneGameController = loader.getController();
         sceneGameController.initializeRobot(robotGenerated);
         URL cssURL = new File("\\ExamProject\\app\\src\\main\\java\\it\\unicam\\cs\\AlfonsoAntognozzi\\App\\application.css").toURI().toURL();
-        stage =(Stage)((Node)e.getSource()).getScene().getWindow();
-        scene = new Scene(root);
+        Stage stage = (Stage) ((Node) e.getSource()).getScene().getWindow();
+        Scene scene = new Scene(root);
         scene.getStylesheets().add(cssURL.toString());
         stage.setScene(scene);
         stage.show();

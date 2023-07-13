@@ -14,11 +14,11 @@ public class ShapeCreator<S extends IShape> implements IShapeCreator {
 
     private final FollowMeParser parser;
     private List<ShapeData> shapeDataList = new ArrayList<>();
-    private final Environment Env;
+    private final Environment environment;
 
 
     public ShapeCreator(Environment Env){
-        this.Env=Env;
+        this.environment = Env;
         parser = new FollowMeParser(null);
     }
 
@@ -33,24 +33,24 @@ public class ShapeCreator<S extends IShape> implements IShapeCreator {
     }
 
     public void parseShape(String code) throws FollowMeParserException{
-        this.shapeDataList=this.parser.parseEnvironment(code);
+        this.shapeDataList = this.parser.parseEnvironment(code);
         this.createShapeList();
     }
 
     public void parseShape(File file) throws FollowMeParserException, IOException {
-        this.shapeDataList=this.parser.parseEnvironment(file);
+        this.shapeDataList = this.parser.parseEnvironment(file);
         this.createShapeList();
     }
 
     public void parseShape(Path path) throws FollowMeParserException, IOException {
-        this.shapeDataList=this.parser.parseEnvironment(path);
+        this.shapeDataList = this.parser.parseEnvironment(path);
         this.createShapeList();
     }
 
     private void createShapeList() {
         for(ShapeData I : this.shapeDataList){
-            if(I.shape().equals("CIRCLE")) Env.addShapeToList(this.shapeCreator(new Condition(I.label()),I.args()[0],I.args()[1], I.args()[2]));
-            if(I.shape().equals("RECTANGLE")) Env.addShapeToList(this.shapeCreator(new Condition(I.label()),I.args()[0],I.args()[1],I.args()[2],I.args()[3]));
+            if(I.shape().equals("CIRCLE")) environment.addShapeToList(this.shapeCreator(new Condition(I.label()),I.args()[0],I.args()[1], I.args()[2]));
+            if(I.shape().equals("RECTANGLE")) environment.addShapeToList(this.shapeCreator(new Condition(I.label()),I.args()[0],I.args()[1],I.args()[2],I.args()[3]));
         }
     }
 

@@ -2,9 +2,7 @@ package it.unicam.cs.AlfonsoAntognozzi.App;
 
 import it.unicam.cs.AlfonsoAntognozzi.io.ShapeCreator;
 import it.unicam.cs.AlfonsoAntognozzi.model.*;
-import it.unicam.cs.AlfonsoAntognozzi.util.FollowMeParser;
-import it.unicam.cs.AlfonsoAntognozzi.util.FollowMeParserException;
-import it.unicam.cs.AlfonsoAntognozzi.util.Position;
+import it.unicam.cs.AlfonsoAntognozzi.util.*;
 import javafx.animation.TranslateTransition;
 import javafx.fxml.FXML;
 import javafx.geometry.Point2D;
@@ -27,7 +25,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.*;
 
-public class SceneGameController <R extends IRobot, S extends IShape> {
+public class SceneGameController <R extends IRobot<IPosition, ICondition>, S extends IShape<IPosition,ICondition,IRobot<IPosition,ICondition>>> {
 
     @FXML
     AnchorPane generalMap;
@@ -53,10 +51,10 @@ public class SceneGameController <R extends IRobot, S extends IShape> {
     final Stage commandChooserStage = new Stage();
     final Stage shapeChooserStage = new Stage();
     private Environment <R,S> env;
-    private final List<Robot> robotList = new ArrayList<>();
+    private final List<R> robotList = new ArrayList<>();
     private FollowMeParser gameParser;
     private Point2D lastMouseLocation;
-    private List<ImageView> imageViews = new ArrayList<>();
+    private final List<ImageView> imageViews = new ArrayList<>();
 
 
 
@@ -64,9 +62,9 @@ public class SceneGameController <R extends IRobot, S extends IShape> {
     zoomLevel=gameMap.getScaleX();
     initializeList(numberOfRobot);
     gameMap.getChildren().addAll(imageViews);
-    env = new Environment(robotList);
-    gameParser = new FollowMeParser(new Handler(env));
-    SC = new ShapeCreator<>(env);
+    env = new Environment<>(robotList);
+    gameParser = new FollowMeParser(new Handler<>(env));
+    SC = new ShapeCreator(env);
     }
 
     private void initializeList(int numberOfRobot) {
@@ -81,7 +79,7 @@ public class SceneGameController <R extends IRobot, S extends IShape> {
             imageView.setLayoutX(xPosition);
             imageView.setLayoutY(yPosition);
             imageViews.add(imageView);
-            robotList.add(new Robot(new Position(xPosition,yPosition)));
+            robotList.add((R) new Robot(new Position(xPosition,yPosition)));
         }
     }
 
@@ -112,17 +110,17 @@ public class SceneGameController <R extends IRobot, S extends IShape> {
     }
 
     private void generateSelectedShapes() {
-        for (int i = 0; i < env.shapeList().size(); i++) {
-            S Shape = env.shapeList().get(i);
+        for (int i = 0; i < env.getShapeList().size(); i++) {
+            S Shape = env.getShapeList().get(i);
             if (Shape instanceof Rectangle) {
                 javafx.scene.shape.Rectangle R = new javafx.scene.shape.Rectangle(Shape.getShapePosition().getX(), Shape.getShapePosition().getY(),
-                        ((Rectangle) Shape).getWidth(), ((Rectangle) Shape).getHeight());
+                        ((Rectangle<?, ?, ?>) Shape).getWidth(), ((Rectangle<?, ?, ?>) Shape).getHeight());
                 R.setFill(Color.TRANSPARENT);
                 R.setStroke(Color.BLACK);
                 gameMap.getChildren().add(R);
                 System.out.println("Questo è un rettangolo");
             } else if (Shape instanceof Circle) {
-                javafx.scene.shape.Circle C = new javafx.scene.shape.Circle(Shape.getShapePosition().getX(), Shape.getShapePosition().getY(), ((Circle) Shape).getRadius());
+                javafx.scene.shape.Circle C = new javafx.scene.shape.Circle(Shape.getShapePosition().getX(), Shape.getShapePosition().getY(), ((Circle<?, ?, ?>) Shape).getRadius());
                 C.setFill(Color.TRANSPARENT);
                 C.setStroke(Color.BLACK);
                 gameMap.getChildren().add(C);
@@ -147,11 +145,11 @@ public class SceneGameController <R extends IRobot, S extends IShape> {
     }
 
     private void Executor() {
-        this.env.executeNextIstruction();
+        this.env.executeNextInstruction();
         for (int i = 0; i < imageViews.size(); i++){
             TranslateTransition transition = new TranslateTransition(Duration.millis(1000), imageViews.get(i));
-            transition.setToX(env.robotList().get(i).getRobotPosition().getX()-imageViews.get(i).getLayoutX());
-            transition.setToY(env.robotList().get(i).getRobotPosition().getY()-imageViews.get(i).getLayoutY());
+            transition.setToX(env.getRobotList().get(i).getRobotPosition().getX()-imageViews.get(i).getLayoutX());
+            transition.setToY(env.getRobotList().get(i).getRobotPosition().getY()-imageViews.get(i).getLayoutY());
             transition.play();
         }
     }

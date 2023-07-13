@@ -1,11 +1,13 @@
 package it.unicam.cs.AlfonsoAntognozzi.model.Command;
-import it.unicam.cs.AlfonsoAntognozzi.model.IRobot;
-import it.unicam.cs.AlfonsoAntognozzi.util.ICondition;
-import it.unicam.cs.AlfonsoAntognozzi.util.IPosition;
 
-public interface ICommand <R extends IRobot<IPosition, ICondition>> {
+/***
+ * This interface is used to compute and apply a command of a given robot.
+ *
+ * @param <R> type of Robot
+ */
+public interface ICommand <R> {
 
-    void Apply (R RobotApplied);
+    void apply(R robotApplied);
 
 
 }

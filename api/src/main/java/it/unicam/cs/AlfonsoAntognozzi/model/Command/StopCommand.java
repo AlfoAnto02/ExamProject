@@ -4,10 +4,14 @@ import it.unicam.cs.AlfonsoAntognozzi.model.IRobot;
 import it.unicam.cs.AlfonsoAntognozzi.util.ICondition;
 import it.unicam.cs.AlfonsoAntognozzi.util.IPosition;
 
-
+/***
+ * This class implements the ICommand interface and its task is only to stop the robot Movement (it will not stop signaling
+ * a condition)
+ * @param <R> type of robot
+ */
 public class StopCommand <R extends IRobot<IPosition, ICondition>> implements ICommand <R>{
     @Override
-    public void Apply(R RobotApplied) {
-        RobotApplied.getRobotController().getCommandList().clear();
+    public void apply(R robotApplied) {
+        robotApplied.getRobotController().getCommandList().clear();
     }
 }

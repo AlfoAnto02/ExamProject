@@ -1,24 +1,24 @@
 package it.unicam.cs.AlfonsoAntognozzi.model;
+import it.unicam.cs.AlfonsoAntognozzi.model.Command.ICommand;
+import it.unicam.cs.AlfonsoAntognozzi.util.Condition;
 import it.unicam.cs.AlfonsoAntognozzi.util.ICondition;
 import it.unicam.cs.AlfonsoAntognozzi.util.IPosition;
 import java.util.*;
 
-public class Robot<P extends IPosition,C extends ICondition> implements IRobot <P,C>{
-
-    private P robotPosition;
-
-    private C robotCondition;
+public class Robot implements IRobot <IPosition,ICondition>{
+    private final IPosition robotPosition;
+    private ICondition robotCondition;
     
-    private final Controller robotController;
-    private LinkedList<Integer> loopTracker = new LinkedList<>();
+    private final IController <ICommand<IRobot<IPosition,ICondition>>, IRobot<IPosition,ICondition>> robotController;
+    private final LinkedList<Integer> loopTracker = new LinkedList<>();
 
-    public Robot (P robotPosition){
+    public Robot (IPosition robotPosition){
         this.robotPosition = robotPosition;
         this.robotCondition =null;
         this.robotController= new Controller<>();
     }
 
-    public boolean checkDistanceBetweenRobot(List<? extends IRobot<P,C>> robots, double dist){
+    public boolean checkDistanceBetweenRobot(List<? extends IRobot<IPosition,ICondition>> robots, double dist){
         return robots.stream()
                 .filter(robot -> !robot.equals(this))
                 .anyMatch(robot -> {
@@ -28,13 +28,11 @@ public class Robot<P extends IPosition,C extends ICondition> implements IRobot <
                 });
     }
 
-
-
-    public void Consume(){
-        this.getRobotController().Consume(this);
+    public void consume(){
+        this.getRobotController().consume(this);
     }
 
-    public Controller getRobotController() {
+    public IController<ICommand<IRobot<IPosition,ICondition>>, IRobot<IPosition,ICondition>> getRobotController() {
         return robotController;
     }
 
@@ -42,16 +40,16 @@ public class Robot<P extends IPosition,C extends ICondition> implements IRobot <
         return loopTracker;
     }
 
-    public P getRobotPosition(){
+    public IPosition getRobotPosition(){
         return this.robotPosition;
     }
 
-    public C getRobotCondition(){
+    public ICondition getRobotCondition(){
          return this.robotCondition;
     }
 
-    public void setRobotCondition(C condition){
-        this.robotCondition=condition;
+    public void setRobotCondition(ICondition condition){
+        this.robotCondition=new Condition(condition.getCondition());
     }
 
     public void setRobotPosition(double x, double y) {

@@ -1,25 +1,20 @@
 package it.unicam.cs.AlfonsoAntognozzi.model;
 
-
-import it.unicam.cs.AlfonsoAntognozzi.model.Command.ICommand;
-import it.unicam.cs.AlfonsoAntognozzi.util.ICondition;
-import it.unicam.cs.AlfonsoAntognozzi.util.IPosition;
-
 import java.util.List;
 
-public interface IController <C extends ICommand, R extends IRobot<IPosition, ICondition>> {
+public interface IController <C,R> {
 
     List<C> getCommandList();
 
     int getProgramCounter();
 
-    void setProgramCounter(int n);
+    void setProgramCounter(int newProgramCounter);
 
     void skipUntilInstruction();
 
     void addCommand(C Command);
 
-    boolean hasNextIstruction();
+    boolean hasNextInstruction();
 
-    void Consume (R Robot);
+    void consume(R robot);
 }
