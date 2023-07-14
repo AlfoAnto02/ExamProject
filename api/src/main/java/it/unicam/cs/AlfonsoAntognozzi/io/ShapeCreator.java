@@ -10,26 +10,26 @@ import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ShapeCreator<S extends IShape> implements IShapeCreator {
+public class ShapeCreator implements IShapeCreator {
 
     private final FollowMeParser parser;
     private List<ShapeData> shapeDataList = new ArrayList<>();
-    private final Environment environment;
+    private final IEnvironment<IRobot<IPosition,ICondition>, IShape<IPosition,ICondition,IRobot<IPosition,ICondition>>> environment;
 
 
-    public ShapeCreator(Environment Env){
-        this.environment = Env;
+    public ShapeCreator(IEnvironment <IRobot<IPosition,ICondition>, IShape<IPosition,ICondition,IRobot<IPosition,ICondition>>>Env){
+        this.environment = Env ;
         parser = new FollowMeParser(null);
     }
 
 
 
-    private S shapeCreator(Condition label, double x, double y, double width, double higth){
-        return (S) new Rectangle(new Position(x,y), label,higth,width);
+    private IShape<IPosition,ICondition,IRobot<IPosition,ICondition>> shapeCreator(Condition label, double x, double y, double width, double height){
+        return  new Rectangle<>(new Position(x,y), label,height,width);
     }
 
-    private S shapeCreator(Condition label, double x, double y, double radius){
-        return (S) new Circle(new Position(x,y), label,radius);
+    private IShape<IPosition,ICondition,IRobot<IPosition,ICondition>> shapeCreator(Condition label, double x, double y, double radius){
+        return  new Circle<>(new Position(x,y), label,radius);
     }
 
     public void parseShape(String code) throws FollowMeParserException{
@@ -49,7 +49,7 @@ public class ShapeCreator<S extends IShape> implements IShapeCreator {
 
     private void createShapeList() {
         for(ShapeData I : this.shapeDataList){
-            if(I.shape().equals("CIRCLE")) environment.addShapeToList(this.shapeCreator(new Condition(I.label()),I.args()[0],I.args()[1], I.args()[2]));
+            if(I.shape().equals("CIRCLE")) environment.addShapeToList( this.shapeCreator(new Condition(I.label()),I.args()[0],I.args()[1], I.args()[2]));
             if(I.shape().equals("RECTANGLE")) environment.addShapeToList(this.shapeCreator(new Condition(I.label()),I.args()[0],I.args()[1],I.args()[2],I.args()[3]));
         }
     }

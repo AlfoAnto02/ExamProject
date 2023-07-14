@@ -13,6 +13,7 @@ public class RepeatCommand <R extends IRobot<IPosition, ICondition>> implements 
     private int counter;
     private final int loopLock;
     public RepeatCommand(int n){
+        if(n<1) throw new IllegalArgumentException("The counter must be >=1");
         this.counter = n;
         this.loopLock = n;
     }
@@ -25,6 +26,7 @@ public class RepeatCommand <R extends IRobot<IPosition, ICondition>> implements 
      */
     @Override
     public void apply(R robotApplied) {
+        if(robotApplied==null) throw new NullPointerException("The robot passed is null");
         if(counter == this.loopLock) {
             robotApplied.getLoopTracker().add(robotApplied.getRobotController().getProgramCounter());
         }

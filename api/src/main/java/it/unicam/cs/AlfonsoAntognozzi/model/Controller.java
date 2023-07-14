@@ -11,6 +11,12 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Stack;
 
+/***
+ * This class implements the IController interface and its job is to manage the controller of a specific robot.
+ *
+ * @param <C> Command that has to be added in the command list
+ * @param <R> type of robot
+ */
 public class Controller <C extends ICommand<R>, R extends IRobot<IPosition, ICondition>> implements IController <C,R>{
     private final List<C> commandList;
     private int programCounter;
@@ -18,14 +24,16 @@ public class Controller <C extends ICommand<R>, R extends IRobot<IPosition, ICon
         this.commandList=new ArrayList<>();
         this.programCounter=0;
     }
-    public void addCommand(C Command){
-        this.getCommandList().add(Command);
+    public void addCommand(C command){
+        if(command==null) throw new NullPointerException("You can't add a null command");
+        this.getCommandList().add(command);
     }
     public void increaseProgramCounter(){
         this.programCounter++;
     }
 
     public void consume(R robot){
+        if(robot == null) throw new NullPointerException("Robot passed is null");
         this.commandList.get(programCounter).apply(robot);
         this.increaseProgramCounter();
     }
@@ -59,6 +67,7 @@ public class Controller <C extends ICommand<R>, R extends IRobot<IPosition, ICon
 
     @Override
     public void setProgramCounter(int newProgramCounter) {
+        if(newProgramCounter<0) throw new IllegalArgumentException("You can't set a negative program counter");
         this.programCounter=newProgramCounter;
     }
 

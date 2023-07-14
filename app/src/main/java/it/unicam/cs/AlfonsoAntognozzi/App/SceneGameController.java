@@ -17,6 +17,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
+import javafx.scene.paint.Paint;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import javafx.util.Duration;
@@ -25,7 +26,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.*;
 
-public class SceneGameController <R extends IRobot<IPosition, ICondition>, S extends IShape<IPosition,ICondition,IRobot<IPosition,ICondition>>> {
+public class SceneGameController  {
 
     @FXML
     AnchorPane generalMap;
@@ -34,24 +35,24 @@ public class SceneGameController <R extends IRobot<IPosition, ICondition>, S ext
     @FXML
     Button zoomIn;
     @FXML
-    Button zommOut;
+    Button zoomOut;
     @FXML
     Button addShapes;
     @FXML
     Button addCommand;
     @FXML
-    Button stepForw;
+    Button stepForward;
     @FXML
     ToolBar ButtonMenu;
     @FXML
     VBox ToolMenu;
     private static final double ZOOM_FACTOR = 0.1;
     private double zoomLevel;
-    private ShapeCreator<S> SC;
+    private ShapeCreator SC;
     final Stage commandChooserStage = new Stage();
     final Stage shapeChooserStage = new Stage();
-    private Environment <R,S> env;
-    private final List<R> robotList = new ArrayList<>();
+    private Environment <IRobot<IPosition, ICondition>,IShape<IPosition, ICondition, IRobot<IPosition, ICondition>>> env;
+    private final List<IRobot<IPosition, ICondition>> robotList = new ArrayList<>();
     private FollowMeParser gameParser;
     private Point2D lastMouseLocation;
     private final List<ImageView> imageViews = new ArrayList<>();
@@ -70,16 +71,16 @@ public class SceneGameController <R extends IRobot<IPosition, ICondition>, S ext
     private void initializeList(int numberOfRobot) {
         Random random = new Random();
         for(int i = 0; i<numberOfRobot;i++){
-            double xPosition = random.nextDouble(666);
-            double yPosition = random.nextDouble(508);
-            Image image = new Image("robot che si muove.jpg");
+            double xPosition = random.nextDouble(950);
+            double yPosition = random.nextDouble(740);
+            Image image = new Image("mapRobot.jpg");
             ImageView imageView = new ImageView(image);
-            imageView.setFitWidth(15);
-            imageView.setFitHeight(15);
+            imageView.setFitWidth(20);
+            imageView.setFitHeight(20);
             imageView.setLayoutX(xPosition);
             imageView.setLayoutY(yPosition);
             imageViews.add(imageView);
-            robotList.add((R) new Robot(new Position(xPosition,yPosition)));
+            robotList.add(new Robot(new Position(xPosition,yPosition)));
         }
     }
 
@@ -111,26 +112,26 @@ public class SceneGameController <R extends IRobot<IPosition, ICondition>, S ext
 
     private void generateSelectedShapes() {
         for (int i = 0; i < env.getShapeList().size(); i++) {
-            S Shape = env.getShapeList().get(i);
+            IShape<IPosition, ICondition, IRobot<IPosition, ICondition>> Shape = env.getShapeList().get(i);
             if (Shape instanceof Rectangle) {
                 javafx.scene.shape.Rectangle R = new javafx.scene.shape.Rectangle(Shape.getShapePosition().getX(), Shape.getShapePosition().getY(),
                         ((Rectangle<?, ?, ?>) Shape).getWidth(), ((Rectangle<?, ?, ?>) Shape).getHeight());
                 R.setFill(Color.TRANSPARENT);
-                R.setStroke(Color.BLACK);
+                R.setStroke(Paint.valueOf("FCBC58"));
+                R.setStrokeWidth(2);
                 gameMap.getChildren().add(R);
-                System.out.println("Questo è un rettangolo");
             } else if (Shape instanceof Circle) {
                 javafx.scene.shape.Circle C = new javafx.scene.shape.Circle(Shape.getShapePosition().getX(), Shape.getShapePosition().getY(), ((Circle<?, ?, ?>) Shape).getRadius());
                 C.setFill(Color.TRANSPARENT);
-                C.setStroke(Color.BLACK);
+                C.setStroke(Paint.valueOf("F57C51"));
+                C.setStrokeWidth(2);
                 gameMap.getChildren().add(C);
-                System.out.println("Questo è un cerchio");
             }
         }
     }
 
 
-    public void stepForwCommand(javafx.event.ActionEvent actionEvent) {
+    public void stepForwardCommand(javafx.event.ActionEvent actionEvent) {
             Executor();
     }
 

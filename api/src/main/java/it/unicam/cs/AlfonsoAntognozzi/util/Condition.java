@@ -4,6 +4,11 @@ import java.util.Objects;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+/***
+ * This class implements the ICondition interface and its task is to check if the label passed respect the specifics of the
+ * project. Everytime this class will be instanced, the constructor will check if the string contains only alphanumeric
+ * characters and the underscore "_".
+ */
 public class Condition implements ICondition {
 
     private final String label;

@@ -21,8 +21,8 @@ public class App extends Application {
         URL startURL = new File("\\ExamProject\\app\\src\\main\\java\\it\\unicam\\cs\\AlfonsoAntognozzi\\App\\ScenaStart.fxml").toURI().toURL();
         Parent root = FXMLLoader.load(startURL);
         Scene scene = new Scene(root,1000,800);
-        Image robottino = new Image("robottino.jpg");
-        primaryStage.getIcons().add(robottino);
+        Image startRobot = new Image("iconRobot.jpg");
+        primaryStage.getIcons().add(startRobot);
         URL cssURL = new File("\\ExamProject\\app\\src\\main\\java\\it\\unicam\\cs\\AlfonsoAntognozzi\\App\\application.css").toURI().toURL();
         scene.getStylesheets().add(cssURL.toString());
         primaryStage.setResizable(false);

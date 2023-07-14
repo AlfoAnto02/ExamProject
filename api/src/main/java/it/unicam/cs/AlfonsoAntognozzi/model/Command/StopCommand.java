@@ -12,6 +12,7 @@ import it.unicam.cs.AlfonsoAntognozzi.util.IPosition;
 public class StopCommand <R extends IRobot<IPosition, ICondition>> implements ICommand <R>{
     @Override
     public void apply(R robotApplied) {
+        if(robotApplied==null) throw new NullPointerException("The robot passed is null");
         robotApplied.getRobotController().getCommandList().clear();
     }
 }

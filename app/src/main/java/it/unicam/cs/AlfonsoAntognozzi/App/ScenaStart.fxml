@@ -10,9 +10,14 @@
 
 <AnchorPane fx:id="startAnchor" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="800.0" minWidth="1000.0" prefHeight="753.0" prefWidth="969.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.unicam.cs.AlfonsoAntognozzi.App.SceneStartController">
    <children>
-      <ImageView fitHeight="359.0" fitWidth="764.0" layoutX="61.0" layoutY="357.0">
+      <ImageView fitHeight="312.0" fitWidth="583.0" layoutX="148.0" layoutY="357.0">
          <image>
-            <Image url="@../../../../../../resources/nuvoletta.jpg" />
+            <Image url="@../../../../../../resources/comicBubble.jpg" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="432.0" fitWidth="374.0" layoutX="-102.0" layoutY="490.0" rotate="41.8">
+         <image>
+            <Image url="@../../../../../../resources/startSceneRobot.jpg" />
          </image>
       </ImageView>
       <Label fx:id="robotLable" alignment="CENTER" graphicTextGap="5.0" layoutX="96.0" layoutY="116.0" prefHeight="55.0" prefWidth="809.0" text="INSERISCI IL NUMERO DI ROBOT CHE VORRESTI GENERARE" AnchorPane.leftAnchor="96.0" AnchorPane.rightAnchor="95.0" AnchorPane.topAnchor="116.0">
@@ -29,7 +34,7 @@
             <Font name="Times New Roman Bold Italic" size="24.0" />
          </font>
       </Button>
-      <Label fx:id="robotLable1" alignment="CENTER" graphicTextGap="5.0" layoutX="234.0" layoutY="457.0" prefHeight="160.0" prefWidth="387.0" text="RICORDA CHE IN GIOCO NON POTRAI AGGIUNGERE ALTRI ROBOT" textAlignment="CENTER" underline="true" wrapText="true" AnchorPane.bottomAnchor="183.0" AnchorPane.leftAnchor="234.0" AnchorPane.rightAnchor="348.0">
+      <Label fx:id="robotLable1" alignment="CENTER" graphicTextGap="5.0" layoutX="231.0" layoutY="433.0" prefHeight="160.0" prefWidth="387.0" text="RICORDA CHE IN GIOCO NON POTRAI AGGIUNGERE ALTRI ROBOT" textAlignment="CENTER" underline="true" wrapText="true" AnchorPane.bottomAnchor="207.0" AnchorPane.leftAnchor="231.0" AnchorPane.rightAnchor="351.0">
          <font>
             <Font name="Calibri Bold" size="20.0" />
          </font>
@@ -39,10 +44,5 @@
             <Font name="Times New Roman Bold Italic" size="12.0" />
          </font>
       </Label>
-      <ImageView fitHeight="376.0" fitWidth="339.0" layoutX="-99.0" layoutY="556.0" rotate="43.6">
-         <image>
-            <Image url="@../../../../../../resources/RobotCiao.jpg" />
-         </image>
-      </ImageView>
    </children>
 </AnchorPane>

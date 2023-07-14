@@ -25,6 +25,7 @@ public class MoveCommand <R extends IRobot<IPosition, ICondition>> implements IC
 
     }
     public void apply(R robotApplied) {
+        if(robotApplied==null) throw new NullPointerException("The robot passed is null");
         double deltaX = this.x * this.speed;
         double deltaY = this.y * this.speed;
         robotApplied.setRobotPosition(deltaX + robotApplied.getRobotPosition().getX(),deltaY + robotApplied.getRobotPosition().getY());

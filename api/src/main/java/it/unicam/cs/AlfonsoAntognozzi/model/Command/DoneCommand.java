@@ -20,11 +20,12 @@ public class DoneCommand<R extends IRobot<IPosition, ICondition>> implements ICo
    In case it's over, it will remove the last index, otherwise it will set the program counter of the robot
    to the last index of the loopTracker (-1 because in the consumer the program counter will increase after the "apply method").
      */
-    public void apply(R RobotApplied) {
-        if (!RobotApplied.getLoopTracker().isEmpty() &&  RobotApplied.getLoopTracker().getLast() == -1) {
-            RobotApplied.getLoopTracker().removeLast();
-        } else if (!RobotApplied.getLoopTracker().isEmpty()){
-            RobotApplied.getRobotController().setProgramCounter(RobotApplied.getLoopTracker().getLast() - 1);
+    public void apply(R robotApplied) {
+        if(robotApplied==null) throw new NullPointerException("The robot passed is null");
+        if (!robotApplied.getLoopTracker().isEmpty() &&  robotApplied.getLoopTracker().getLast() == -1) {
+            robotApplied.getLoopTracker().removeLast();
+        } else if (!robotApplied.getLoopTracker().isEmpty()){
+            robotApplied.getRobotController().setProgramCounter(robotApplied.getLoopTracker().getLast() - 1);
         }
     }
 }

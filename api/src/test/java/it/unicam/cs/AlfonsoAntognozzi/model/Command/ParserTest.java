@@ -14,11 +14,11 @@ public class ParserTest {
     @Test
     void testParseCommands() throws Exception {
         Robot r = new Robot(new Position(5,5));
-        List<Robot> robotList = new ArrayList<Robot>();
+        List<Robot> robotList = new ArrayList<>();
         robotList.add(r);
         File commandFile = new File("\\ExamProject\\api\\src\\test\\java\\it\\unicam\\cs\\AlfonsoAntognozzi\\model\\Command\\testCommandFile");
         Environment<Robot, IShape<IPosition, ICondition, IRobot<IPosition, ICondition>>> env = new Environment<>(robotList);
-        Handler handler = new Handler<>(env);
+        Handler<Robot, IShape<IPosition, ICondition, IRobot<IPosition, ICondition>>> handler = new Handler<>(env);
         FollowMeParser parser = new FollowMeParser(handler);
         parser.parseRobotProgram(commandFile);
         assertEquals(r.getRobotController().getCommandList().size(),3);
@@ -30,9 +30,9 @@ public class ParserTest {
     @Test
     void testParseShapes() throws FollowMeParserException, IOException {
         Robot r = new Robot(new Position(5,5));
-        List<Robot> robotList = new ArrayList<Robot>();
+        List<IRobot<IPosition,ICondition>> robotList = new ArrayList<>();
         robotList.add(r);
-        Environment<Robot, IShape<IPosition, ICondition, IRobot<IPosition, ICondition>>> env = new Environment<>(robotList);
+        Environment<IRobot<IPosition,ICondition>, IShape<IPosition, ICondition, IRobot<IPosition, ICondition>>> env = new Environment<>(robotList);
         File shapeFile = new File("\\ExamProject\\api\\src\\test\\java\\it\\unicam\\cs\\AlfonsoAntognozzi\\model\\Command\\testShapeFile");
         ShapeCreator shapeCreator = new ShapeCreator(env);
         shapeCreator.parseShape(shapeFile);

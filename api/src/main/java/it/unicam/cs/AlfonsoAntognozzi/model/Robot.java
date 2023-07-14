@@ -5,20 +5,24 @@ import it.unicam.cs.AlfonsoAntognozzi.util.ICondition;
 import it.unicam.cs.AlfonsoAntognozzi.util.IPosition;
 import java.util.*;
 
+/***
+ * This class implements the IRobot interface.
+ */
 public class Robot implements IRobot <IPosition,ICondition>{
     private final IPosition robotPosition;
     private ICondition robotCondition;
-    
     private final IController <ICommand<IRobot<IPosition,ICondition>>, IRobot<IPosition,ICondition>> robotController;
     private final LinkedList<Integer> loopTracker = new LinkedList<>();
 
     public Robot (IPosition robotPosition){
+        if(robotPosition==null) throw new NullPointerException("You can't add a robot with a null position");
         this.robotPosition = robotPosition;
         this.robotCondition =null;
         this.robotController= new Controller<>();
     }
 
     public boolean checkDistanceBetweenRobot(List<? extends IRobot<IPosition,ICondition>> robots, double dist){
+        if(dist < 0) throw new IllegalArgumentException("The distance value must be >= 0");
         return robots.stream()
                 .filter(robot -> !robot.equals(this))
                 .anyMatch(robot -> {
@@ -49,6 +53,7 @@ public class Robot implements IRobot <IPosition,ICondition>{
     }
 
     public void setRobotCondition(ICondition condition){
+        if(condition==null) throw new NullPointerException("The condition must be not null");
         this.robotCondition=new Condition(condition.getCondition());
     }
 

@@ -21,9 +21,7 @@ public class CommandsTest {
         Robot r = new Robot(new Position(2,3));
         double[] args1 = {1.1,0.5,4};
         assertThrows(IllegalArgumentException.class,
-                () -> {
-                    r.getRobotController().addCommand(new MoveCommand<>(args1));
-                });
+                () -> r.getRobotController().addCommand(new MoveCommand<>(args1)));
         double[] args2 = {0.5,0.5,4};
         r.getRobotController().addCommand(new MoveCommand<>(args2));
         r.consume();
@@ -61,7 +59,7 @@ public class CommandsTest {
         r.getRobotController().addCommand(new SignalCommand<>(c));
         r.consume();
         assertEquals(r.getRobotCondition().getCondition(),c.getCondition());
-        r.getRobotController().addCommand(new UnSignalCommand<>());
+        r.getRobotController().addCommand(new UnSignalCommand<>(new Condition("Hello")));
         r.consume();
         assertEquals(r.getRobotCondition().getCondition(),"_");
     }
@@ -139,9 +137,7 @@ public class CommandsTest {
         double[] args = {0.5,0.5,4};
         r.getRobotController().addCommand(new MoveCommand<>(args));
         assertThrows(IllegalArgumentException.class,
-                () -> {
-                    r.getRobotController().addCommand(new ContinueCommand<>(-1));
-                });
+                () -> r.getRobotController().addCommand(new ContinueCommand<>(-1)));
         r.getRobotController().addCommand(new ContinueCommand<>(3));
         r.consume();
         r.consume();

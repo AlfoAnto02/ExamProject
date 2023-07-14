@@ -20,7 +20,7 @@
                         <Font name="Calibri Bold" size="15.0" />
                      </font>
                   </Button>
-                  <Button fx:id="zommOut" alignment="TOP_CENTER" contentDisplay="TOP" mnemonicParsing="false" onAction="#zoomOutEvent" onKeyPressed="#handleKeyPress" text="-">
+                  <Button fx:id="zoomOut" alignment="TOP_CENTER" contentDisplay="TOP" mnemonicParsing="false" onAction="#zoomOutEvent" onKeyPressed="#handleKeyPress" text="-">
                      <font>
                         <Font name="Calibri Bold" size="15.0" />
                      </font>
@@ -35,7 +35,7 @@
                         <Font name="Calibri Bold" size="15.0" />
                      </font>
                   </Button>
-                  <Button fx:id="stepForw" mnemonicParsing="false" onAction="#stepForwCommand" text="StepForward">
+                  <Button fx:id="stepForward" mnemonicParsing="false" onAction="#stepForwardCommand" text="StepForward">
                      <font>
                         <Font name="Calibri Bold" size="15.0" />
                      </font>

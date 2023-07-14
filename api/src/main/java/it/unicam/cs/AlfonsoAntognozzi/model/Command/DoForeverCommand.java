@@ -12,7 +12,8 @@ import it.unicam.cs.AlfonsoAntognozzi.util.IPosition;
  */
 public class DoForeverCommand <R extends IRobot<IPosition, ICondition>> implements ICommand <R>{
     @Override
-    public void apply(R RobotApplied) {
-        RobotApplied.getLoopTracker().add(RobotApplied.getRobotController().getProgramCounter());
+    public void apply(R robotApplied) {
+        if(robotApplied==null) throw new NullPointerException("The robot passed is null");
+        robotApplied.getLoopTracker().add(robotApplied.getRobotController().getProgramCounter());
     }
 }

@@ -23,10 +23,10 @@ public class PositionTest {
     void p1ShouldEqualsp2(){
         Position p1 = new Position(3,3);
         Position p2 = new Position(2,2);
-        assertFalse(p1.equals(p2));
+        assertNotEquals(p1, p2);
         p2.setY(3);
         p2.setX(3);
-        assertTrue(p1.equals(p2));
+        assertEquals(p1, p2);
     }
 
 }

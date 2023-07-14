@@ -26,8 +26,8 @@ public class ConditionTest {
         Condition c1 = new Condition("Ciao123_");
         Condition c2 = new Condition("Ciao123");
         Condition c3 = new Condition("Ciao123_");
-        assertFalse(c1.equals(c2));
-        assertTrue(c1.equals(c3));
+        assertNotEquals(c1, c2);
+        assertEquals(c1, c3);
     }
 
 }

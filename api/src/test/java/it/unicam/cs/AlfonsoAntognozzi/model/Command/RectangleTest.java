@@ -39,13 +39,13 @@ public class RectangleTest {
                 new Rectangle<>(new Position(1,3),new Condition("Hello"),4,4);
         Rectangle<Position, Condition, IRobot<Position, Condition>> r2 =
                 new Rectangle<>(new Position(1,3),new Condition("Hi"),4,4);
-        assertFalse(r1.equals(r2));
+        assertNotEquals(r1, r2);
         Rectangle<Position, Condition, IRobot<Position, Condition>> r3 =
                 new Rectangle<>(new Position(1,3),new Condition("Hello"),1,4);
-        assertFalse(r1.equals(r3));
+        assertNotEquals(r1, r3);
         Rectangle<Position, Condition, IRobot<Position, Condition>> r4 =
                 new Rectangle<>(new Position(1,3),new Condition("Hello"),4,4);
-        assertTrue(r1.equals(r4));
+        assertEquals(r1, r4);
     }
     @Test
     void testHashCode() {

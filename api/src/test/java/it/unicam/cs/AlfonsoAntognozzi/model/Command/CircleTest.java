@@ -8,7 +8,7 @@ import it.unicam.cs.AlfonsoAntognozzi.model.IRobot;
 import it.unicam.cs.AlfonsoAntognozzi.model.Robot;
 import it.unicam.cs.AlfonsoAntognozzi.util.Condition;
 import it.unicam.cs.AlfonsoAntognozzi.util.Position;
-public class CirlceTest {
+public class CircleTest {
 
     @Test
     void testCreateCircle(){
@@ -41,8 +41,8 @@ public class CirlceTest {
                 new Circle<>(new Position(1, 3), new Condition("Hello"), 4);
         Circle<Position, Condition, IRobot<Position, Condition>> c3 =
                 new Circle<>(new Position(1, 3), new Condition("Hi"), 4);
-        assertTrue(c1.equals(c2));
-        assertFalse(c1.equals(c3));
+        assertEquals(c1, c2);
+        assertNotEquals(c1, c3);
     }
 
     @Test
@@ -52,7 +52,7 @@ public class CirlceTest {
         Circle<Position, Condition, IRobot<Position, Condition>> c2 =
                 new Circle<>(new Position(1, 3), new Condition("Hello"), 4);
 
-        assertEquals(c1.hashCode(), c2.hashCode()); // I cerchi con gli stessi attributi devono avere lo stesso hash code
+        assertEquals(c1.hashCode(), c2.hashCode());
     }
 
     @Test

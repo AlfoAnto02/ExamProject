@@ -26,6 +26,7 @@ public class ContinueCommand <R extends IRobot<IPosition, ICondition>> implement
      */
     @Override
     public void apply(R robotApplied) {
+        if(robotApplied==null) throw new NullPointerException("The robot passed is null");
         for(int i = 0; i < this.times; i++){
             robotApplied.getRobotController().setProgramCounter(robotApplied.getRobotController().getProgramCounter()-1);
             robotApplied.getRobotController().consume(robotApplied);

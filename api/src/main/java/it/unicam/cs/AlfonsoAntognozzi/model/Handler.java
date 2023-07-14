@@ -1,16 +1,21 @@
 package it.unicam.cs.AlfonsoAntognozzi.model;
-import java.util.List;
 import java.util.Objects;
-import java.util.stream.Collectors;
 import it.unicam.cs.AlfonsoAntognozzi.model.Command.*;
 import it.unicam.cs.AlfonsoAntognozzi.util.Condition;
 import it.unicam.cs.AlfonsoAntognozzi.util.FollowMeParserHandler;
 import it.unicam.cs.AlfonsoAntognozzi.util.ICondition;
 import it.unicam.cs.AlfonsoAntognozzi.util.IPosition;
 
+/***
+ * This class implements the FollowMeParserHandler Interface and his job is to load each Robot_Controller (present in the
+ * robot list of the game environment) with the parsed instructions.
+ * @param <R> type of robot
+ * @param <S> type of shape
+ */
 public class Handler <R extends IRobot<IPosition,ICondition>, S extends IShape<IPosition,ICondition,IRobot<IPosition,ICondition>>> implements FollowMeParserHandler<R> {
     private final Environment <R,S> gameEnvironment;
     public Handler(Environment<R,S> gameEnvironment){
+        if(gameEnvironment==null) throw new NullPointerException("You can't handle a null game environment");
         this.gameEnvironment = gameEnvironment;
     }
 
@@ -45,11 +50,7 @@ public class Handler <R extends IRobot<IPosition,ICondition>, S extends IShape<I
 
     @Override
     public void unsignalCommand(String label) {
-        List<R> tempRobList = this.gameEnvironment.getRobotList()
-                .stream()
-                .filter(r -> r.getRobotCondition().equals(new Condition(label)))
-                .toList();
-        tempRobList.forEach(robot -> robot.getRobotController().addCommand(new UnSignalCommand<>()));
+        this.gameEnvironment.getRobotList().forEach(robot -> robot.getRobotController().addCommand(new UnSignalCommand<>(new Condition(label))));
     }
 
     @Override

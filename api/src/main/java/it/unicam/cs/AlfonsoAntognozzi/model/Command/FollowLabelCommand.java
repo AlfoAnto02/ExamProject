@@ -20,6 +20,7 @@ public class FollowLabelCommand <R extends IRobot<IPosition, ICondition>> implem
     private final double speed;
 
     public FollowLabelCommand(String label, double[] args, List<R> robotList){
+        if(robotList.isEmpty()) throw new IllegalArgumentException("The passed robotList is empty");
         this.args = args;
         this.robotList = robotList;
         this.label = label;
@@ -37,6 +38,7 @@ public class FollowLabelCommand <R extends IRobot<IPosition, ICondition>> implem
      */
     @Override
     public void apply(R robotApplied) {
+        if(robotApplied==null) throw new NullPointerException("The robot passed is null");
         List<R> tempRobList = robotList.stream()
                 .filter(robot -> robot.getRobotCondition() != null && robot.getRobotCondition().equals(new Condition(label)))
                 .collect(Collectors.toList());

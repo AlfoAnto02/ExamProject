@@ -17,6 +17,7 @@ public class SignalCommand <R extends IRobot<IPosition,ICondition>, C extends IC
     }
     @Override
     public void apply(R robotApplied) {
+        if(robotApplied==null) throw new NullPointerException("The robot passed is null");
         robotApplied.setRobotCondition(this.label);
     }
 }

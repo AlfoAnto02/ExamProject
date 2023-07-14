@@ -5,6 +5,9 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.file.Path;
 
+/***
+ * This class is used to parse the shapes using the shape class hierarchy
+ */
 public interface IShapeCreator {
 
     void parseShape(String s) throws FollowMeParserException;
