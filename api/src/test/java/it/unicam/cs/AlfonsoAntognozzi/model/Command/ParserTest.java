@@ -16,7 +16,7 @@ public class ParserTest {
         Robot r = new Robot(new Position(5,5));
         List<Robot> robotList = new ArrayList<>();
         robotList.add(r);
-        File commandFile = new File("\\ExamProject\\api\\src\\test\\java\\it\\unicam\\cs\\AlfonsoAntognozzi\\model\\Command\\testCommandFile");
+        File commandFile = new File("..\\api\\src\\test\\resources\\testCommandFile.txt");
         Environment<Robot, IShape<IPosition, ICondition, IRobot<IPosition, ICondition>>> env = new Environment<>(robotList);
         Handler<Robot, IShape<IPosition, ICondition, IRobot<IPosition, ICondition>>> handler = new Handler<>(env);
         FollowMeParser parser = new FollowMeParser(handler);
@@ -33,7 +33,7 @@ public class ParserTest {
         List<IRobot<IPosition,ICondition>> robotList = new ArrayList<>();
         robotList.add(r);
         Environment<IRobot<IPosition,ICondition>, IShape<IPosition, ICondition, IRobot<IPosition, ICondition>>> env = new Environment<>(robotList);
-        File shapeFile = new File("\\ExamProject\\api\\src\\test\\java\\it\\unicam\\cs\\AlfonsoAntognozzi\\model\\Command\\testShapeFile");
+        File shapeFile = new File("..\\api\\src\\test\\resources\\testShapeFile.txt");
         ShapeCreator shapeCreator = new ShapeCreator(env);
         shapeCreator.parseShape(shapeFile);
         assertEquals(env.getShapeList().size(),3);

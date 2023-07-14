@@ -18,12 +18,12 @@ public class App extends Application {
 
     @Override
     public void start(Stage primaryStage) throws IOException {
-        URL startURL = new File("\\ExamProject\\app\\src\\main\\java\\it\\unicam\\cs\\AlfonsoAntognozzi\\App\\ScenaStart.fxml").toURI().toURL();
+        URL startURL = new File("..\\app\\src\\main\\java\\it\\unicam\\cs\\AlfonsoAntognozzi\\App\\ScenaStart.fxml").toURI().toURL();
         Parent root = FXMLLoader.load(startURL);
         Scene scene = new Scene(root,1000,800);
         Image startRobot = new Image("iconRobot.jpg");
         primaryStage.getIcons().add(startRobot);
-        URL cssURL = new File("\\ExamProject\\app\\src\\main\\java\\it\\unicam\\cs\\AlfonsoAntognozzi\\App\\application.css").toURI().toURL();
+        URL cssURL = new File("..\\app\\src\\main\\java\\it\\unicam\\cs\\AlfonsoAntognozzi\\App\\application.css").toURI().toURL();
         scene.getStylesheets().add(cssURL.toString());
         primaryStage.setResizable(false);
         primaryStage.setScene(scene);

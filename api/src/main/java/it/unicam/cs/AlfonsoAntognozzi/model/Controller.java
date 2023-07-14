@@ -67,7 +67,7 @@ public class Controller <C extends ICommand<R>, R extends IRobot<IPosition, ICon
 
     @Override
     public void setProgramCounter(int newProgramCounter) {
-        if(newProgramCounter<0) throw new IllegalArgumentException("You can't set a negative program counter");
+        if(newProgramCounter<-1) throw new IllegalArgumentException("You can't set a negative program counter");
         this.programCounter=newProgramCounter;
     }
 
