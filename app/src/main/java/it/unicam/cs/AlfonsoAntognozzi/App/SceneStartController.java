@@ -29,18 +29,18 @@ public class SceneStartController {
 
     public void changeRobotLable(ActionEvent e) {
         try {
-            if (Integer.parseInt(robotField.getText()) < 0) {
-                robotLable.setText("HAI SCELTO UN VALORE TROPPO BASSO, SCEGLILO > DI 0");
+            if (Integer.parseInt(robotField.getText()) <= 0) {
+                robotLable.setText("THE VALUE YOU HAVE CHOSEN IS TOO LOW, CHOOSE IT > 0");
                 nextSceneButton.setTextFill(Color.RED);
             } else if (Integer.parseInt(robotField.getText()) > 200) {
-                robotLable.setText("HAI SCELTO UN VALORE TROPPO ALTO, SCEGLILO < DI 200");
+                robotLable.setText("THE VALUE YOU HAVE CHOSEN IS TOO HIGH, CHOOSE IT < 200");
                 nextSceneButton.setTextFill(Color.RED);
             } else {
                 nextSceneButton.setTextFill(Color.GREEN);
-                robotLable.setText("HAI SCELTO " + robotField.getText() + " ROBOT!!!");
+                robotLable.setText("YOU CHOOSE " + robotField.getText() + " ROBOT!!!");
             }
         }catch(NumberFormatException num){
-            robotLable.setText("SCEGLI UN NUMERO NON UNA CIFRA!!!");
+            robotLable.setText("CHOOSE A NUMBER!!!");
             nextSceneButton.setTextFill(Color.RED);
         }
 

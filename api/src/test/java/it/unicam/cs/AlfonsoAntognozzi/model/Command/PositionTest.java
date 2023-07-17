@@ -6,13 +6,13 @@ import static org.junit.jupiter.api.Assertions.*;
 public class PositionTest {
 
     @Test
-    void xAndyShouldBeFour(){
+    void testGet(){
         Position P = new Position(4,4);
         assertEquals(4,P.getX());
         assertEquals(4,P.getY());
     }
     @Test
-    void setShouldReturn3(){
+    void testSet(){
         Position P = new Position(4,4);
         P.setX(3);
         P.setY(3);
@@ -20,7 +20,7 @@ public class PositionTest {
         assertEquals(3,P.getY());
     }
     @Test
-    void p1ShouldEqualsp2(){
+    void testEquals(){
         Position p1 = new Position(3,3);
         Position p2 = new Position(2,2);
         assertNotEquals(p1, p2);

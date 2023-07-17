@@ -5,7 +5,7 @@ import static org.junit.jupiter.api.Assertions.*;
 public class ConditionTest {
 
     @Test
-    void incorrectString(){
+    void testIncorrectString(){
         assertThrows(IllegalArgumentException.class,
                 () -> {
                     Condition c = new Condition("ùà+è--.");
@@ -16,13 +16,13 @@ public class ConditionTest {
                 });
     }
     @Test
-    void correctString(){
+    void testCorrectString(){
         Condition c = new Condition("HelloWorld_");
         assertEquals(c.getCondition(),"HelloWorld_");
     }
 
     @Test
-    void correctEquals(){
+    void testEquals(){
         Condition c1 = new Condition("Ciao123_");
         Condition c2 = new Condition("Ciao123");
         Condition c3 = new Condition("Ciao123_");

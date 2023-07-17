@@ -56,10 +56,18 @@ public class SceneGameController  {
     private FollowMeParser gameParser;
     private Point2D lastMouseLocation;
     private final List<ImageView> imageViews = new ArrayList<>();
+    private double gameMapWidth;
+    private double gameMapHeight;
 
-
-
+    /***
+     * This method is used to initialize the robotList of the environment with a random value for the Position between
+     * -(gameMapWidth/2),gameMapWidth/2 and -(gameMapHeight/2),gameMapHeight/2). It is also used for initialize the local
+     * variable of the class.
+     * @param numberOfRobot Number of robot to generate
+     */
     public void initializeRobot(int numberOfRobot){
+    gameMapWidth=gameMap.getPrefWidth();
+    gameMapHeight=gameMap.getPrefHeight();
     zoomLevel=gameMap.getScaleX();
     initializeList(numberOfRobot);
     gameMap.getChildren().addAll(imageViews);
@@ -67,24 +75,42 @@ public class SceneGameController  {
     gameParser = new FollowMeParser(new Handler<>(env));
     SC = new ShapeCreator(env);
     }
-
+    /*
+    This a support Method.
+     */
     private void initializeList(int numberOfRobot) {
         Random random = new Random();
         for(int i = 0; i<numberOfRobot;i++){
-            double xPosition = random.nextDouble(950);
-            double yPosition = random.nextDouble(740);
+            double xPosition = random.nextDouble(-(gameMapWidth/2),gameMapWidth/2);
+            double yPosition = random.nextDouble(-(gameMapHeight/2),gameMapHeight/2);
+            robotList.add(new Robot(new Position(xPosition,yPosition)));
             Image image = new Image("mapRobot.jpg");
             ImageView imageView = new ImageView(image);
             imageView.setFitWidth(20);
             imageView.setFitHeight(20);
-            imageView.setLayoutX(xPosition);
-            imageView.setLayoutY(yPosition);
+            imageView.setLayoutX(getTranslateX(xPosition));
+            imageView.setLayoutY(getTranslateY(yPosition));
             imageViews.add(imageView);
-            robotList.add(new Robot(new Position(xPosition,yPosition)));
         }
     }
 
+    /*
+    Those method getTranslateX and getTranslateY are used for translate the robot position based on the coordinates of
+    the Cartesian Axes to the Computer position based on Computer coordinates. The difference is that in the Cartesian Axes
+    the center (0,0) is in the middle of the Pane meanwhile in the Computer the (0,0) is located in the top left corner.
+     */
+    private double getTranslateX(double x){
+        return (x+gameMapWidth/2);
+    }
 
+    private double getTranslateY(double y){
+        return (gameMapHeight/2-y);
+    }
+
+
+    /*
+    Method used for add a command file to the game.
+     */
     public void addCommandToGame(javafx.event.ActionEvent actionEvent) throws Exception {
         try {
             FileChooser fileChooser = new FileChooser();
@@ -94,9 +120,12 @@ public class SceneGameController  {
             fileChooser.setInitialDirectory(new File(desktopPath));
             File selectedFile = fileChooser.showOpenDialog(commandChooserStage);
             gameParser.parseRobotProgram(selectedFile);
-        }catch (NullPointerException e ){ System.out.println("Non hai selezionato un file!");}
+        }catch (NullPointerException e ){ System.out.println("You didn't select a command File!");}
     }
 
+    /*
+    Method used for add a shape file to the game.
+     */
     public void addShapesToGame(javafx.event.ActionEvent actionEvent) throws FollowMeParserException, IOException {
         try {
             FileChooser fileChooser = new FileChooser();
@@ -107,21 +136,24 @@ public class SceneGameController  {
             File selectedFile = fileChooser.showOpenDialog(shapeChooserStage);
             SC.parseShape(selectedFile);
             generateSelectedShapes();
-        }catch (NullPointerException e ){ System.out.println("Non hai selezionato un file!");}
+        }catch (NullPointerException e ){ System.out.println("You didn't select a shape file");}
     }
 
+    /*
+    Method used to generate the shapes selected from the shape file.
+     */
     private void generateSelectedShapes() {
         for (int i = 0; i < env.getShapeList().size(); i++) {
             IShape<IPosition, ICondition, IRobot<IPosition, ICondition>> Shape = env.getShapeList().get(i);
             if (Shape instanceof Rectangle) {
-                javafx.scene.shape.Rectangle R = new javafx.scene.shape.Rectangle(Shape.getShapePosition().getX(), Shape.getShapePosition().getY(),
+                javafx.scene.shape.Rectangle R = new javafx.scene.shape.Rectangle(getTranslateX(Shape.getShapePosition().getX()), getTranslateY(Shape.getShapePosition().getY()),
                         ((Rectangle<?, ?, ?>) Shape).getWidth(), ((Rectangle<?, ?, ?>) Shape).getHeight());
                 R.setFill(Color.TRANSPARENT);
                 R.setStroke(Paint.valueOf("FCBC58"));
                 R.setStrokeWidth(2);
                 gameMap.getChildren().add(R);
             } else if (Shape instanceof Circle) {
-                javafx.scene.shape.Circle C = new javafx.scene.shape.Circle(Shape.getShapePosition().getX(), Shape.getShapePosition().getY(), ((Circle<?, ?, ?>) Shape).getRadius());
+                javafx.scene.shape.Circle C = new javafx.scene.shape.Circle(getTranslateX(Shape.getShapePosition().getX()), getTranslateY(Shape.getShapePosition().getY()), ((Circle<?, ?, ?>) Shape).getRadius());
                 C.setFill(Color.TRANSPARENT);
                 C.setStroke(Paint.valueOf("F57C51"));
                 C.setStrokeWidth(2);
@@ -131,10 +163,16 @@ public class SceneGameController  {
     }
 
 
+    /*
+    Method used to continue the simulation manually.
+     */
     public void stepForwardCommand(javafx.event.ActionEvent actionEvent) {
             Executor();
     }
 
+    /*
+    Method used to continue the simulation automatically.
+     */
     public void autoPlay(javafx.event.ActionEvent actionEvent) {
         TimerTask task = new TimerTask(){
             public void run(){
@@ -142,19 +180,26 @@ public class SceneGameController  {
             }
         };
         Timer timer = new Timer();
-        timer.schedule(task, 0, 2000);
+        timer.schedule(task, 0, 1400);
     }
 
+
+    /*
+    Method used for execute the nextInstruction in the Environment and translate the robot positions in the game map.
+     */
     private void Executor() {
         this.env.executeNextInstruction();
         for (int i = 0; i < imageViews.size(); i++){
             TranslateTransition transition = new TranslateTransition(Duration.millis(1000), imageViews.get(i));
-            transition.setToX(env.getRobotList().get(i).getRobotPosition().getX()-imageViews.get(i).getLayoutX());
-            transition.setToY(env.getRobotList().get(i).getRobotPosition().getY()-imageViews.get(i).getLayoutY());
+            transition.setToX(getTranslateX(env.getRobotList().get(i).getRobotPosition().getX())-imageViews.get(i).getLayoutX());
+            transition.setToY(getTranslateY(env.getRobotList().get(i).getRobotPosition().getY())-imageViews.get(i).getLayoutY());
             transition.play();
         }
     }
 
+    /*
+    Those are GUI method for handle the zoomIn and zoomOut even and for move the game map Pane with the mouse.
+     */
     public void handleMousePressed(MouseEvent event){
         lastMouseLocation = new Point2D(event.getSceneX(), event.getSceneY());
     }
@@ -201,6 +246,7 @@ public class SceneGameController  {
         gameMap.setScaleY(zoomLevel);
         gameMap.setScaleX(zoomLevel);
     }
+
 
 
 

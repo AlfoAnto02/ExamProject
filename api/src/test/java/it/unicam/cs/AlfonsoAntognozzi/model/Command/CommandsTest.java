@@ -53,7 +53,7 @@ public class CommandsTest {
     }
 
     @Test
-    void testSignalAndUnsignalCommand(){
+    void testSignalAndUnSignalCommand(){
         Robot r = new Robot(new Position(2,3));
         Condition c = new Condition("Hello");
         r.getRobotController().addCommand(new SignalCommand<>(c));

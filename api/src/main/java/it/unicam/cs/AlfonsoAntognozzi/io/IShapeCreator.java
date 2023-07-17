@@ -10,7 +10,7 @@ import java.nio.file.Path;
  */
 public interface IShapeCreator {
 
-    void parseShape(String s) throws FollowMeParserException;
+    void parseShape(String string) throws FollowMeParserException;
 
     void parseShape (File file) throws FollowMeParserException, IOException;
 

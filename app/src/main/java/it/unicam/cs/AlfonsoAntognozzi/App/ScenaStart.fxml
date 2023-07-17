@@ -20,7 +20,7 @@
             <Image url="@../../../../../../resources/startSceneRobot.jpg" />
          </image>
       </ImageView>
-      <Label fx:id="robotLable" alignment="CENTER" graphicTextGap="5.0" layoutX="96.0" layoutY="116.0" prefHeight="55.0" prefWidth="809.0" text="INSERISCI IL NUMERO DI ROBOT CHE VORRESTI GENERARE" AnchorPane.leftAnchor="96.0" AnchorPane.rightAnchor="95.0" AnchorPane.topAnchor="116.0">
+      <Label fx:id="robotLable" alignment="CENTER" graphicTextGap="5.0" layoutX="46.0" layoutY="116.0" prefHeight="55.0" prefWidth="902.0" text="CHOOSE THE NUMBER OF ROBOT THAT YOU WANT TO GENERATE" AnchorPane.leftAnchor="45.0" AnchorPane.rightAnchor="45.0" AnchorPane.topAnchor="116.0">
          <font>
             <Font name="Times New Roman Bold" size="26.0" />
          </font>
@@ -29,12 +29,12 @@
          <font>
             <Font name="Calibri Bold" size="18.0" />
          </font></TextField>
-      <Button fx:id="nextSceneButton" layoutX="400.0" layoutY="313.0" mnemonicParsing="false" onAction="#next" prefHeight="39.0" prefWidth="164.0" text="AVANTI" AnchorPane.leftAnchor="400.0" AnchorPane.rightAnchor="400.0">
+      <Button fx:id="nextSceneButton" layoutX="400.0" layoutY="313.0" mnemonicParsing="false" onAction="#next" prefHeight="39.0" prefWidth="164.0" text="NEXT" AnchorPane.leftAnchor="400.0" AnchorPane.rightAnchor="400.0">
          <font>
             <Font name="Times New Roman Bold Italic" size="24.0" />
          </font>
       </Button>
-      <Label fx:id="robotLable1" alignment="CENTER" graphicTextGap="5.0" layoutX="231.0" layoutY="433.0" prefHeight="160.0" prefWidth="387.0" text="RICORDA CHE IN GIOCO NON POTRAI AGGIUNGERE ALTRI ROBOT" textAlignment="CENTER" underline="true" wrapText="true" AnchorPane.bottomAnchor="207.0" AnchorPane.leftAnchor="231.0" AnchorPane.rightAnchor="351.0">
+      <Label fx:id="robotLable1" alignment="CENTER" graphicTextGap="5.0" layoutX="275.0" layoutY="433.0" prefHeight="160.0" prefWidth="322.0" text="REMEMBER THAT YOU WILL NOT BE ABLE TO ADD MORE ROBOTS IN GAME" textAlignment="CENTER" underline="true" wrapText="true" AnchorPane.bottomAnchor="207.0" AnchorPane.leftAnchor="275.0" AnchorPane.rightAnchor="403.0">
          <font>
             <Font name="Calibri Bold" size="20.0" />
          </font>

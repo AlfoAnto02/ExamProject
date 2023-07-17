@@ -20,7 +20,7 @@ public class FollowLabelCommand <R extends IRobot<IPosition, ICondition>> implem
     private final double speed;
 
     public FollowLabelCommand(String label, double[] args, List<R> robotList){
-        if(robotList.isEmpty()) throw new IllegalArgumentException("The passed robotList is empty");
+        if(robotList.isEmpty()) throw new IllegalArgumentException("The robotList passed is empty");
         this.args = args;
         this.robotList = robotList;
         this.label = label;

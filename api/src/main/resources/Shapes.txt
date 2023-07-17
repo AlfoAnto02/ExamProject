@@ -1,0 +1,3 @@
+label CIRCLE 0 0 100
+label RECTANGLE -100 300 70 80
+label CIRCLE 200 -100 70

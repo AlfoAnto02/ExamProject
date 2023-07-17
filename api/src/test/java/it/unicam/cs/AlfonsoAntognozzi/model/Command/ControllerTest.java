@@ -10,14 +10,14 @@ import static org.junit.jupiter.api.Assertions.*;
 public class ControllerTest {
 
     @Test
-    void addCommandTest(){
+    void testAddCommand(){
         Controller<ICommand<IRobot<IPosition, ICondition>>,IRobot<IPosition,ICondition>> controller = new Controller<>();
         controller.addCommand(new DoneCommand<>());
         assertEquals(1, controller.getCommandList().size());
     }
 
     @Test
-    void consumeCommandTest(){
+    void testConsumeCommand(){
         Robot r = new Robot(new Position(1,1));
         r.getRobotController().addCommand(new MoveCommand<>(new double[] {0.5,0.5,4}));
         r.getRobotController().consume(r);

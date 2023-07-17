@@ -12,7 +12,7 @@ public class Circle<P extends IPosition, C extends ICondition, R extends IRobot<
     private final double radius;
     public Circle(P position, C condition, double radius) {
         super(position, condition);
-        if(radius < 0) throw new IllegalArgumentException("radius must be > 0");
+        if(radius < 0) throw new IllegalArgumentException("Radius must be > 0");
         this.radius = radius;
     }
 
