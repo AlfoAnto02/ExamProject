@@ -15,6 +15,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.Objects;
 
 
 public class SceneStartController {
@@ -60,19 +61,12 @@ public class SceneStartController {
     }
 
     private void connectToSecondScene(ActionEvent e) throws IOException {
-        String gamePath = "..\\app\\src\\main\\java\\it\\unicam\\cs\\AlfonsoAntognozzi\\App\\ScenaGame.fxml";
-        Path fxmlAbsolutePath = Paths.get(System.getProperty("user.dir")).resolve(gamePath);
-        URL fxmlURL = fxmlAbsolutePath.toUri().toURL();
-        FXMLLoader loader = new FXMLLoader(fxmlURL);
+        FXMLLoader loader = new FXMLLoader(Objects.requireNonNull(getClass().getResource("/ScenaGame.fxml")));
         Parent root = loader.load();
         SceneGameController sceneGameController = loader.getController();
         sceneGameController.initializeRobot(robotGenerated);
-        String cssPath = "..\\app\\src\\main\\java\\it\\unicam\\cs\\AlfonsoAntognozzi\\App\\application.css";
-        Path cssAbsolutePath =Paths.get(System.getProperty("user.dir")).resolve(cssPath);
-        URL cssURL = cssAbsolutePath.toUri().toURL();
         Stage stage = (Stage) ((Node) e.getSource()).getScene().getWindow();
         Scene scene = new Scene(root);
-        scene.getStylesheets().add(cssURL.toString());
         stage.setScene(scene);
         stage.show();
     }

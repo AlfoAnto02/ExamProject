@@ -10,6 +10,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.Objects;
 
 public class App extends Application {
 
@@ -19,17 +20,11 @@ public class App extends Application {
 
     @Override
     public void start(Stage primaryStage) throws IOException {
-        String fxmlPath = "..\\app\\src\\main\\java\\it\\unicam\\cs\\AlfonsoAntognozzi\\App\\ScenaStart.fxml"; // Percorso relativo per FXML
-        Path fxmlAbsolutePath = Paths.get(System.getProperty("user.dir")).resolve(fxmlPath);
-        URL fxmlURL = fxmlAbsolutePath.toUri().toURL();
-        Parent root = FXMLLoader.load(fxmlURL);
+        FXMLLoader loader = new FXMLLoader(Objects.requireNonNull(getClass().getResource("/ScenaStart.fxml")));
+        Parent root = loader.load();
         Scene scene = new Scene(root,1000,800);
         Image startRobot = new Image("iconRobot.jpg");
         primaryStage.getIcons().add(startRobot);
-        String cssPath = "..\\app\\src\\main\\java\\it\\unicam\\cs\\AlfonsoAntognozzi\\App\\application.css"; // Percorso relativo per CSS
-        Path cssAbsolutePath = Paths.get(System.getProperty("user.dir")).resolve(cssPath);
-        URL cssURL = cssAbsolutePath.toUri().toURL();
-        scene.getStylesheets().add(cssURL.toString());
         primaryStage.setResizable(false);
         primaryStage.setScene(scene);
         primaryStage.show();
