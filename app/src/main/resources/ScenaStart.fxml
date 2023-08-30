@@ -10,12 +10,12 @@
 
 <AnchorPane fx:id="startAnchor" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="800.0" minWidth="1000.0" prefHeight="753.0" prefWidth="969.0" stylesheets="@application.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.unicam.cs.AlfonsoAntognozzi.App.SceneStartController">
    <children>
-      <ImageView fitHeight="312.0" fitWidth="583.0" layoutX="148.0" layoutY="357.0">
+      <ImageView fitHeight="354.0" fitWidth="653.0" layoutX="111.0" layoutY="335.0">
          <image>
             <Image url="@comicBubble.jpg" />
          </image>
       </ImageView>
-      <ImageView fitHeight="432.0" fitWidth="374.0" layoutX="-102.0" layoutY="490.0" rotate="41.8">
+      <ImageView fitHeight="419.0" fitWidth="374.0" layoutX="-111.0" layoutY="500.0" rotate="41.8">
          <image>
             <Image url="@startSceneRobot.jpg" />
          </image>
@@ -34,7 +34,7 @@
             <Font name="Times New Roman Bold Italic" size="24.0" />
          </font>
       </Button>
-      <Label fx:id="robotLable1" alignment="CENTER" graphicTextGap="5.0" layoutX="275.0" layoutY="433.0" prefHeight="160.0" prefWidth="322.0" stylesheets="@application.css" text="REMEMBER THAT YOU WILL NOT BE ABLE TO ADD MORE ROBOTS IN GAME" textAlignment="CENTER" underline="true" wrapText="true" AnchorPane.bottomAnchor="207.0" AnchorPane.leftAnchor="275.0" AnchorPane.rightAnchor="403.0">
+      <Label fx:id="robotLable1" alignment="CENTER" graphicTextGap="5.0" layoutX="285.0" layoutY="429.0" prefHeight="160.0" prefWidth="322.0" stylesheets="@application.css" text="REMEMBER THAT YOU WILL NOT BE ABLE TO ADD MORE ROBOTS IN GAME" textAlignment="CENTER" underline="true" wrapText="true" AnchorPane.bottomAnchor="211.0" AnchorPane.leftAnchor="285.0" AnchorPane.rightAnchor="393.0">
          <font>
             <Font name="Calibri Bold" size="20.0" />
          </font>

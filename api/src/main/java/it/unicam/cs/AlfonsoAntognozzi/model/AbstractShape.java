@@ -5,7 +5,7 @@ import it.unicam.cs.AlfonsoAntognozzi.util.IPosition;
 
 import java.util.Objects;
 
-/***
+/**
  * This abstract class implements the IShape interface and its task is to enclose the generic behaviors of any type of
  * figure
  *
@@ -17,15 +17,32 @@ public abstract  class AbstractShape<P extends IPosition, C extends ICondition,R
     private final P shapePosition;
     private final C shapeCondition;
 
+    /**
+     * This is the constructor of the abstract class
+     *
+     * @param position position set for the shape
+     * @param condition condition set for the shape
+     */
     public AbstractShape(P position, C condition){
         if(position == null || condition == null) throw new NullPointerException("Wrong Position or Condition");
         this.shapePosition = position;
         this.shapeCondition = condition;
     }
 
+    /**
+     * Method used to get the position of the shape
+     *
+     * @return the position of the shape
+     */
     public P  getShapePosition (){
         return this.shapePosition;
     }
+
+    /**
+     * Method used to get the condition of the shape
+     *
+     * @return the condition of the shape
+     */
     public C getShapeCondition(){
         return this.shapeCondition;
     }

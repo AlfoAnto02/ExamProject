@@ -6,7 +6,7 @@ import it.unicam.cs.AlfonsoAntognozzi.util.IPosition;
 
 import java.util.Random;
 
-/***
+/**
  * This class implements the ICommand interface and its task is to move the given robot
  * to a random Location determined by the arguments of the variable args.
  *
@@ -20,6 +20,12 @@ public class MoveRandomCommand  <R extends IRobot<IPosition, ICondition>> implem
     private final double y2;
     private final double speed;
 
+    /**
+     * 2 Position (x1,y1) (x2,y2) and a speed are required for a MoveRandomCommand
+     *
+     * @param args arguments passed for the moveRandomCommand (x1,x2,y1,y2 and the speed).
+     */
+
     public MoveRandomCommand(double[] args){
         if(args[4]<0) throw new IllegalArgumentException("The speed must be >0");
         this.x1 = args[0];
@@ -28,9 +34,12 @@ public class MoveRandomCommand  <R extends IRobot<IPosition, ICondition>> implem
         this.y2 = args[3];
         this.speed = args[4];
     }
-    /*
-       The logic behind this method is that, based on the given coordinates (x1,y1) (x2,y2), a random direction will
-       be calculated between these coordinates.
+
+    /**
+     * The logic behind this method is that, based on the given coordinates (x1,y1) (x2,y2), a random direction will
+     * be calculated between these coordinates.
+     *
+     * @param robotApplied robot that has to apply the command
      */
     @Override
     public void apply(R robotApplied) {

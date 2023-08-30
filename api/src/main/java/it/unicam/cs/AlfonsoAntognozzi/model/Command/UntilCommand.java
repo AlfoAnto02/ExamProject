@@ -6,7 +6,7 @@ import it.unicam.cs.AlfonsoAntognozzi.util.ICondition;
 import it.unicam.cs.AlfonsoAntognozzi.util.IPosition;
 import java.util.List;
 
-/***
+/**
  * This class implements the ICommand interface and its task is to repeat a given set of commands
  * until a certain condition is not perceived in the environment (which means, until the robot is in a figure that is marked
  * by a particular condition).
@@ -19,7 +19,8 @@ public class UntilCommand <R extends IRobot<IPosition, ICondition>, S extends IS
     private final List<S> shapeList;
     private final Condition checkedCondition;
 
-    /***
+    /**
+     * This is the constructor of the class
      *
      * @param checkedShapeList shapeList of the Environment.
      * @param label the particular condition of the method.
@@ -29,12 +30,15 @@ public class UntilCommand <R extends IRobot<IPosition, ICondition>, S extends IS
         checkedCondition = new Condition(label);
         this.loopLocker = 0;
     }
-    /*
-    The shapes that are marked by the condition given in the Constructor of the class are going to be stored in List<S>
-    checkedShapeList. Everytime this method is called, it will check if the robot is in the figure that is marked by the
-    condition. In this case the loop will continue, otherwise it will skip the commands that are in loop and set the
-    last index of the robot LoopTracker to -1.
-    Algorithm Spec: in case of In nested loop, the loopLocker is set to 0.
+
+    /**
+     * The shapes that are marked by the condition given in the Constructor of the class are going to be stored in List<S>
+     * checkedShapeList. Everytime this method is called, it will check if the robot is in the figure that is marked by the
+     * condition. In this case the loop will continue, otherwise it will skip the commands that are in loop and set the
+     * last index of the robot LoopTracker to -1.
+     * Algorithm Spec: in case of In nested loop, the loopLocker is set to 0 and it will work.
+     *
+     * @param robotApplied robot that has to apply the command
      */
     @Override
     public void apply(R robotApplied) {

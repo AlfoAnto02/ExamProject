@@ -8,24 +8,49 @@ public class Position implements IPosition {
 
     private double y;
 
-
+    /**
+     * This is the constructor of the class
+     *
+     * @param x initial x
+     * @param y initial y
+     */
     public Position (double x, double y){
         this.x=x;
         this.y=y;
     }
+
+    /**
+     * Method used to get the x coordinate
+     *
+     * @return the x coordinate
+     */
     public double getX() {
         return x;
     }
 
+    /**
+     * Method used to set a new x for the position
+     *
+     * @param x new x that has to be set
+     */
     public void setX(double x) {
         this.x = x;
     }
 
-
+    /**
+     * Method used to get the Y coordinate
+     *
+     * @return the y coordinate
+     */
     public double getY() {
         return y;
     }
 
+    /**
+     * Method used to set a new x for the position
+     *
+     * @param y new y that has to be set
+     */
     public void setY(double y) {
         this.y = y;
     }

@@ -4,7 +4,7 @@ import java.util.Objects;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-/***
+/**
  * This class implements the ICondition interface and its task is to check if the label passed respect the specifics of the
  * project. Everytime this class will be instanced, the constructor will check if the string contains only alphanumeric
  * characters and the underscore "_".
@@ -13,6 +13,11 @@ public class Condition implements ICondition {
 
     private final String label;
 
+    /**
+     * This is the constructor of the class
+     *
+     * @param label initial label
+     */
     public Condition (String label){
         if(label == null || label.trim().isEmpty()) throw new NullPointerException("Incorrect format of string");
         Pattern p = Pattern.compile("[^A-Za-z0-9 _]");
@@ -22,6 +27,11 @@ public class Condition implements ICondition {
         else this.label =label;
     }
 
+    /**
+     * Method used to get the condition
+     *
+     * @return the string value of the condition
+     */
     public String getCondition(){
         return this.label;
     }

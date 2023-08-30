@@ -8,17 +8,24 @@ import java.util.List;
 import java.util.Random;
 import java.util.stream.Collectors;
 
-/***
+/**
  * This class implements the ICommand interface and its task is to apply the followLabelCommand.
  *
  * @param <R> type of robot
  */
 public class FollowLabelCommand <R extends IRobot<IPosition, ICondition>> implements ICommand <R>{
-    private final double[] args; //arguments of the followLabelCommand
-    private final List<R> robotList; //current list of robot of the Environment
-    private final String label; //Label that the followed robots should signal
+    private final double[] args;
+    private final List<R> robotList;
+    private final String label;
     private final double speed;
 
+    /**
+     * This is the constructor of the class
+     *
+     * @param label Label that the followed robots should signal
+     * @param args arguments of the followLabelCommand
+     * @param robotList current list of robot in the Environment
+     */
     public FollowLabelCommand(String label, double[] args, List<R> robotList){
         if(robotList.isEmpty()) throw new IllegalArgumentException("The robotList passed is empty");
         this.args = args;
@@ -27,14 +34,16 @@ public class FollowLabelCommand <R extends IRobot<IPosition, ICondition>> implem
         this.speed = args[1];
     }
 
-    /*
-       tempRobList is the list of robots that are actually signaling a given label.
-       In case the robots that are signaling the label are < 2 then the method will call the private
-       callFollowRandomCommand() method that will generate a random position between (dist,-dist) (dist,-dist)
-       The logic behind this is that (as it is written in the schematics of the project) it is impossible to calculate
-       the avg position of the robots that "dist" (where dist is a variable indicating the distance between a robot and
-       another robot) meters apart if only 1 robot is present.
-       Otherwise, the method will continue calculating the avg x and y and eliminating the robots that aren't "dist" meters apart.
+    /**
+     * tempRobList is the list of robots that are actually signaling a given label.
+     * In case the robots that are signaling the label are < 2 then the method will call the private
+     * callFollowRandomCommand() method that will generate a random position between (dist,-dist) (dist,-dist)
+     * The logic behind this is that (as it is written in the schematics of the project) it is impossible to calculate
+     * the avg position of the robots that "dist" (where dist is a variable indicating the distance between a robot and
+     * another robot) meters apart if only 1 robot is present.
+     * Otherwise, the method will continue calculating the avg x and y and eliminating the robots that aren't "dist" meters apart.
+     *
+     * @param robotApplied robot that has to apply the command
      */
     @Override
     public void apply(R robotApplied) {
@@ -56,10 +65,11 @@ public class FollowLabelCommand <R extends IRobot<IPosition, ICondition>> implem
         else this.callFollowRandomCommand(robotApplied);
     }
 
-    /***
+    /**
+     * Method used to move the robot to the new Position calculated
      *
      * @param position The avg position of robot Signaling the label and "dist" meters apart
-     * @param robotApplied
+     * @param robotApplied robot that has to apply the command
      */
 
     private void callFollowCommand(Position position, R robotApplied) {
@@ -68,8 +78,14 @@ public class FollowLabelCommand <R extends IRobot<IPosition, ICondition>> implem
         robotApplied.setRobotPosition(deltaX+ robotApplied.getRobotPosition().getX(), deltaY+ robotApplied.getRobotPosition().getY());
         }
 
+    /**
+     * Method used to move the robot in a random location if the robot that are signaling the label and are "dist" meters apart are <2
+     *
+     * @param RobotApplied robot that has to apply the command
+     */
 
-        private void callFollowRandomCommand(R RobotApplied){
+
+    private void callFollowRandomCommand(R RobotApplied){
             Random random = new Random();
             double x1 = args[0];
             double x2 = -args[0];

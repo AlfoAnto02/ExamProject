@@ -3,7 +3,7 @@ import it.unicam.cs.AlfonsoAntognozzi.util.ICondition;
 import it.unicam.cs.AlfonsoAntognozzi.util.IPosition;
 
 import java.util.Objects;
-/***
+/**
  * This class extends the Abstract class AbstractShape and its task is to represent the figure of the Rectangle
  * @param <P> Position of the circle
  * @param <C> Condition of the circle
@@ -12,12 +12,28 @@ import java.util.Objects;
 public class Rectangle <P extends IPosition, C extends ICondition, R extends IRobot<P,C>> extends AbstractShape <P,C,R> {
     private final double height;
     private final double width;
+
+    /**
+     * This is the constructor of the class
+     *
+     * @param position position set for the rectangle
+     * @param condition condition set for the rectangle
+     * @param height height set for the rectangle
+     * @param width width set for the rectangle
+     */
     public Rectangle(P position, C condition, double height, double width) {
         super(position, condition);
         if (height < 0 || width < 0) throw new IllegalArgumentException("Height and Width of the Rectangle must be >0");
         this.height=height;
         this.width=width;
     }
+
+    /**
+     * This method is used to check if the given robot collides with Rectangle
+     *
+     * @param robot robot that has to check if it collides with the shape
+     * @return True if the robot collides, False otherwise
+     */
     public boolean checkCollision(R robot){
         if(robot==null) throw new NullPointerException("The robot passed is null");
         return (robot.getRobotPosition().getX() >= this.getShapePosition().getX() - this.getWidth()/ 2) && (robot.getRobotPosition().getX() <= this.getShapePosition().getX() + this.getWidth() / 2) &&
